@@ -22,14 +22,11 @@ import org.apache.flink.annotation.Internal;
 import org.apache.flink.streaming.connectors.kafka.config.StartupMode;
 import org.apache.flink.table.api.ValidationException;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
 import static org.apache.flink.table.descriptors.DescriptorProperties.noValidation;
-import static org.apache.flink.table.descriptors.StreamTableDescriptorValidator.UPDATE_MODE;
-import static org.apache.flink.table.descriptors.StreamTableDescriptorValidator.UPDATE_MODE_VALUE_APPEND;
 
 /**
  * The validator for {@link Kafka}.
@@ -67,8 +64,9 @@ public class KafkaValidator extends ConnectorDescriptorValidator {
 	@Override
 	public void validate(DescriptorProperties properties) {
 		super.validate(properties);
-		properties.validateEnumValues(UPDATE_MODE, true, Collections.singletonList(UPDATE_MODE_VALUE_APPEND));
-
+//		properties.validateEnumValues(UPDATE_MODE, true, Collections.singletonList(UPDATE_MODE_VALUE_APPEND));
+// cfbber
+		System.err.println("特性丢失 ++++ UPDATE_MODE");
 		properties.validateValue(CONNECTOR_TYPE, CONNECTOR_TYPE_VALUE_KAFKA, false);
 
 		properties.validateString(CONNECTOR_TOPIC, false, 1, Integer.MAX_VALUE);

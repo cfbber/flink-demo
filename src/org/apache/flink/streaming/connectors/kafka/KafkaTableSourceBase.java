@@ -115,7 +115,8 @@ public abstract class KafkaTableSourceBase implements
 			DeserializationSchema<Row> deserializationSchema,
 			StartupMode startupMode,
 			Map<KafkaTopicPartition, Long> specificStartupOffsets) {
-		this.schema = TableSchemaUtils.checkNoGeneratedColumns(schema);
+		this.schema = null;//cfbber
+		System.err.println("特性丢失 ++++ schema");
 		this.proctimeAttribute = validateProctimeAttribute(proctimeAttribute);
 		this.rowtimeAttributeDescriptors = validateRowtimeAttributeDescriptors(rowtimeAttributeDescriptors);
 		this.fieldMapping = fieldMapping;
