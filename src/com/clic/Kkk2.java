@@ -17,7 +17,7 @@ public class Kkk2 {
 
         Properties pros = new Properties();
         pros.put("bootstrap.servers", "192.168.62.128:9092");
-        pros.setProperty("group.id", "tes"); // 消费组 ID
+        pros.setProperty("group.id", "tesx"); // 消费组 ID
         pros.setProperty("enable.auto.commit", "true"); // 是否启动自动提交消者偏移量
         pros.setProperty("auto.commit.interval.ms", "1000"); //  每间隔多长时间提交一次偏移量信息
         pros.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer"); // 指定反序列化的key类型
