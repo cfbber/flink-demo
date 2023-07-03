@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Main-Class: com.clic.Kkk2
+Class-Path: log4j-1.2.15.jar flink-csv-1.14.6.jar slf4j-api-1.7.29.jar f
+ link-json-1.14.6.jar slf4j-log4j12-1.7.15.jar flink-cep_2.11-1.14.6.jar
+  kafka-clients-0.9.0.1.jar flink-dist_2.11-1.14.6.jar flink-gelly_2.11-
+ 1.14.6.jar flink-table_2.11-1.14.6.jar flink-python_2.11-1.14.6.jar fli
+ nk-s3-fs-hadoop-1.14.6.jar flink-s3-fs-presto-1.14.6.jar flink-oss-fs-h
+ adoop-1.14.6.jar flink-cep-scala_2.11-1.14.6.jar flink-azure-fs-hadoop-
+ 1.14.6.jar flink-shaded-zookeeper-3.5.9.jar flink-sql-client_2.11-1.14.
+ 6.jar flink-gelly-scala_2.11-1.14.6.jar flink-shaded-zookeeper-3.4.14.j
+ ar flink-queryable-state-runtime-1.14.6.jar flink-state-processor-api_2
+ .11-1.14.6.jar flink-shaded-netty-tcnative-dynamic-2.0.39.Final-14.0.ja
+ r
+
