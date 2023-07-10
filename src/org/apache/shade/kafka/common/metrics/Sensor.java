@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.kafka.common.MetricName;
+import org.apache.shade.kafka.common.MetricName;
 import org.apache.shade.kafka.common.metrics.CompoundStat.NamedMeasurable;
 import org.apache.shade.kafka.common.utils.Time;
 import org.apache.shade.kafka.common.utils.Utils;

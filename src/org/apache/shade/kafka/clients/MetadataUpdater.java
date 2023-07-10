@@ -13,7 +13,7 @@
 
 package org.apache.shade.kafka.clients;
 
-import org.apache.kafka.common.Node;
+import org.apache.shade.kafka.common.Node;
 import org.apache.shade.kafka.common.protocol.types.Struct;
 
 import java.util.List;

@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.TopicPartition;
 import org.apache.shade.kafka.common.protocol.ApiKeys;
 import org.apache.shade.kafka.common.protocol.Errors;
 import org.apache.shade.kafka.common.protocol.ProtoUtils;

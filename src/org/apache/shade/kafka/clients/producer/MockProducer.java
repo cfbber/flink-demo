@@ -26,8 +26,8 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.kafka.clients.producer.Callback;
-import org.apache.kafka.common.*;
+import org.apache.shade.kafka.clients.producer.Callback;
+import org.apache.shade.kafka.common.*;
 import org.apache.shade.kafka.common.serialization.Serializer;
 import org.apache.shade.kafka.clients.producer.internals.DefaultPartitioner;
 import org.apache.shade.kafka.clients.producer.internals.FutureRecordMetadata;
@@ -108,7 +108,7 @@ public class MockProducer<K, V> implements Producer<K, V> {
      * @see #history()
      */
     @Override
-    public synchronized Future<RecordMetadata> send(ProducerRecord<K, V> record, org.apache.kafka.clients.producer.Callback callback) {
+    public synchronized Future<RecordMetadata> send(ProducerRecord<K, V> record, Callback callback) {
         int partition = 0;
         if (this.cluster.partitionsForTopic(record.topic()) != null)
             partition = partition(record, this.cluster);
@@ -226,7 +226,7 @@ public class MockProducer<K, V> implements Producer<K, V> {
         private final long offset;
         private final RecordMetadata metadata;
         private final org.apache.shade.kafka.clients.producer.internals.ProduceRequestResult result;
-        private final org.apache.kafka.clients.producer.Callback callback;
+        private final Callback callback;
         private final TopicPartition topicPartition;
 
         public Completion(TopicPartition topicPartition,

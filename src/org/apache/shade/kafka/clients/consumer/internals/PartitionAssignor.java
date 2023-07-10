@@ -13,7 +13,7 @@
 package org.apache.shade.kafka.clients.consumer.internals;
 
 import org.apache.shade.kafka.common.Cluster;
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.TopicPartition;
 import org.apache.shade.kafka.clients.consumer.KafkaConsumer;
 
 import java.nio.ByteBuffer;

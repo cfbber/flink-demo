@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.shade.kafka.common.KafkaException;
 import org.apache.shade.kafka.common.metrics.Measurable;
 import org.apache.shade.kafka.common.metrics.MetricConfig;
-import org.apache.kafka.common.MetricName;
+import org.apache.shade.kafka.common.MetricName;
 import org.apache.shade.kafka.common.metrics.Metrics;
 import org.apache.shade.kafka.common.metrics.Sensor;
 import org.apache.shade.kafka.common.utils.SystemTime;

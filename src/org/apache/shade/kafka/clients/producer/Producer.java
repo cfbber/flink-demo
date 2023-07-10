@@ -22,10 +22,10 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.kafka.clients.producer.Callback;
-import org.apache.kafka.common.Metric;
-import org.apache.kafka.common.PartitionInfo;
-import org.apache.kafka.common.MetricName;
+import org.apache.shade.kafka.clients.producer.Callback;
+import org.apache.shade.kafka.common.Metric;
+import org.apache.shade.kafka.common.PartitionInfo;
+import org.apache.shade.kafka.common.MetricName;
 
 
 /**

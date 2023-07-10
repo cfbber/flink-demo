@@ -12,8 +12,6 @@
  */
 package org.apache.shade.kafka.common;
 
-import org.apache.kafka.common.Node;
-
 /**
  * Information about a topic-partition.
  */
@@ -21,11 +19,11 @@ public class PartitionInfo {
 
     private final String topic;
     private final int partition;
-    private final org.apache.kafka.common.Node leader;
-    private final org.apache.kafka.common.Node[] replicas;
-    private final org.apache.kafka.common.Node[] inSyncReplicas;
+    private final Node leader;
+    private final Node[] replicas;
+    private final Node[] inSyncReplicas;
 
-    public PartitionInfo(String topic, int partition, org.apache.kafka.common.Node leader, org.apache.kafka.common.Node[] replicas, org.apache.kafka.common.Node[] inSyncReplicas) {
+    public PartitionInfo(String topic, int partition, Node leader, Node[] replicas, Node[] inSyncReplicas) {
         this.topic = topic;
         this.partition = partition;
         this.leader = leader;
@@ -50,14 +48,14 @@ public class PartitionInfo {
     /**
      * The node id of the node currently acting as a leader for this partition or -1 if there is no leader
      */
-    public org.apache.kafka.common.Node leader() {
+    public Node leader() {
         return leader;
     }
 
     /**
      * The complete set of replicas for this partition regardless of whether they are alive or up-to-date
      */
-    public org.apache.kafka.common.Node[] replicas() {
+    public Node[] replicas() {
         return replicas;
     }
 
@@ -65,7 +63,7 @@ public class PartitionInfo {
      * The subset of the replicas that are in sync, that is caught-up to the leader and ready to take over as leader if
      * the leader should fail
      */
-    public org.apache.kafka.common.Node[] inSyncReplicas() {
+    public Node[] inSyncReplicas() {
         return inSyncReplicas;
     }
 

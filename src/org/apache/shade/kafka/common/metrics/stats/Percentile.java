@@ -16,7 +16,7 @@
  */
 package org.apache.shade.kafka.common.metrics.stats;
 
-import org.apache.kafka.common.MetricName;
+import org.apache.shade.kafka.common.MetricName;
 
 public class Percentile {
 

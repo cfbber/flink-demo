@@ -23,11 +23,11 @@ import java.io.InputStream;
 
 import org.apache.shade.kafka.common.utils.Utils;
 
-import net.jpountz.lz4.LZ4Exception;
-import net.jpountz.lz4.LZ4Factory;
-import net.jpountz.lz4.LZ4SafeDecompressor;
-import net.jpountz.xxhash.XXHash32;
-import net.jpountz.xxhash.XXHashFactory;
+import org.apache.shade.net.jpountz.lz4.LZ4Exception;
+import org.apache.shade.net.jpountz.lz4.LZ4Factory;
+import org.apache.shade.net.jpountz.lz4.LZ4SafeDecompressor;
+import org.apache.shade.net.jpountz.xxhash.XXHash32;
+import org.apache.shade.net.jpountz.xxhash.XXHashFactory;
 
 /**
  * A partial implementation of the v1.4.1 LZ4 Frame format.
@@ -168,7 +168,7 @@ public final class KafkaLZ4BlockInputStream extends FilterInputStream {
 
     @Override
     public int read(byte[] b, int off, int len) throws IOException {
-        net.jpountz.util.Utils.checkRange(b, off, len);
+        org.apache.shade.net.jpountz.util.Utils.checkRange(b, off, len);
         if (finished) {
             return -1;
         }

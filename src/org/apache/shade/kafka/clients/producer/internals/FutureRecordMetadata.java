@@ -17,7 +17,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.shade.kafka.clients.producer.RecordMetadata;
 
 /**
  * The future result of a record send

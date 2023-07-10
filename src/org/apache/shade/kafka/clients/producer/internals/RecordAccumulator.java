@@ -13,12 +13,12 @@
 package org.apache.shade.kafka.clients.producer.internals;
 
 import java.util.Iterator;
-import org.apache.kafka.clients.producer.Callback;
+import org.apache.shade.kafka.clients.producer.Callback;
 import org.apache.shade.kafka.common.Cluster;
-import org.apache.kafka.common.MetricName;
-import org.apache.kafka.common.Node;
-import org.apache.kafka.common.PartitionInfo;
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.MetricName;
+import org.apache.shade.kafka.common.Node;
+import org.apache.shade.kafka.common.PartitionInfo;
+import org.apache.shade.kafka.common.TopicPartition;
 import org.apache.shade.kafka.common.metrics.Measurable;
 import org.apache.shade.kafka.common.metrics.MetricConfig;
 import org.apache.shade.kafka.common.metrics.Metrics;

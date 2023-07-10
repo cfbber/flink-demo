@@ -23,10 +23,10 @@ import java.io.OutputStream;
 
 import org.apache.shade.kafka.common.utils.Utils;
 
-import net.jpountz.lz4.LZ4Compressor;
-import net.jpountz.lz4.LZ4Factory;
-import net.jpountz.xxhash.XXHash32;
-import net.jpountz.xxhash.XXHashFactory;
+import org.apache.shade.net.jpountz.lz4.LZ4Compressor;
+import org.apache.shade.net.jpountz.lz4.LZ4Factory;
+import org.apache.shade.net.jpountz.xxhash.XXHash32;
+import org.apache.shade.net.jpountz.xxhash.XXHashFactory;
 
 /**
  * A partial implementation of the v1.4.1 LZ4 Frame format.
@@ -180,7 +180,7 @@ public final class KafkaLZ4BlockOutputStream extends FilterOutputStream {
 
     @Override
     public void write(byte[] b, int off, int len) throws IOException {
-        net.jpountz.util.Utils.checkRange(b, off, len);
+        org.apache.shade.net.jpountz.util.Utils.checkRange(b, off, len);
         ensureNotFinished();
 
         int bufferRemainingLength = maxBlockSize - bufferOffset;

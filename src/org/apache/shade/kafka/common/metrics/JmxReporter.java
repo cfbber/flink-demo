@@ -32,7 +32,7 @@ import javax.management.ObjectName;
 import javax.management.ReflectionException;
 
 import org.apache.shade.kafka.common.KafkaException;
-import org.apache.kafka.common.MetricName;
+import org.apache.shade.kafka.common.MetricName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

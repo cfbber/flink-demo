@@ -13,7 +13,7 @@
 package org.apache.shade.kafka.clients.consumer;
 
 import org.apache.shade.kafka.common.KafkaException;
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.TopicPartition;
 
 import java.util.Set;
 

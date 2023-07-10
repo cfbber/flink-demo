@@ -12,9 +12,9 @@
  */
 package org.apache.shade.kafka.clients.consumer;
 
-import org.apache.kafka.common.Metric;
-import org.apache.kafka.common.MetricName;
-import org.apache.kafka.common.PartitionInfo;
+import org.apache.shade.kafka.common.Metric;
+import org.apache.shade.kafka.common.MetricName;
+import org.apache.shade.kafka.common.PartitionInfo;
 import org.apache.shade.kafka.common.TopicPartition;
 import org.apache.shade.kafka.common.annotation.InterfaceStability;
 

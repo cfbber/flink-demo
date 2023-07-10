@@ -12,15 +12,15 @@
  */
 package org.apache.shade.kafka.clients.consumer;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.OffsetAndMetadata;
+import org.apache.shade.kafka.clients.consumer.ConsumerRecord;
+import org.apache.shade.kafka.clients.consumer.ConsumerRecords;
+import org.apache.shade.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.shade.kafka.common.KafkaException;
-import org.apache.kafka.common.Metric;
-import org.apache.kafka.common.MetricName;
-import org.apache.kafka.common.PartitionInfo;
-import org.apache.kafka.common.TopicPartition;
-import org.apache.kafka.common.errors.WakeupException;
+import org.apache.shade.kafka.common.Metric;
+import org.apache.shade.kafka.common.MetricName;
+import org.apache.shade.kafka.common.PartitionInfo;
+import org.apache.shade.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.errors.WakeupException;
 import org.apache.shade.kafka.clients.consumer.internals.NoOpConsumerRebalanceListener;
 import org.apache.shade.kafka.clients.consumer.internals.SubscriptionState;
 
@@ -47,7 +47,7 @@ public class MockConsumer<K, V> implements Consumer<K, V> {
 
     private final Map<String, List<PartitionInfo>> partitions;
     private final org.apache.shade.kafka.clients.consumer.internals.SubscriptionState subscriptions;
-    private Map<TopicPartition, List<org.apache.kafka.clients.consumer.ConsumerRecord<K, V>>> records;
+    private Map<TopicPartition, List<ConsumerRecord<K, V>>> records;
     private Set<TopicPartition> paused;
     private boolean closed;
     private final Map<TopicPartition, Long> beginningOffsets;
@@ -126,7 +126,7 @@ public class MockConsumer<K, V> implements Consumer<K, V> {
     }
 
     @Override
-    public org.apache.kafka.clients.consumer.ConsumerRecords<K, V> poll(long timeout) {
+    public ConsumerRecords<K, V> poll(long timeout) {
         ensureNotClosed();
 
         // Synchronize around the entire execution so new tasks to be triggered on subsequent poll calls can be added in
@@ -153,26 +153,26 @@ public class MockConsumer<K, V> implements Consumer<K, V> {
             updateFetchPosition(tp);
 
         // update the consumed offset
-        for (Map.Entry<TopicPartition, List<org.apache.kafka.clients.consumer.ConsumerRecord<K, V>>> entry : this.records.entrySet()) {
+        for (Map.Entry<TopicPartition, List<ConsumerRecord<K, V>>> entry : this.records.entrySet()) {
             if (!subscriptions.isPaused(entry.getKey())) {
-                List<org.apache.kafka.clients.consumer.ConsumerRecord<K, V>> recs = entry.getValue();
+                List<ConsumerRecord<K, V>> recs = entry.getValue();
                 if (!recs.isEmpty())
                     this.subscriptions.position(entry.getKey(), recs.get(recs.size() - 1).offset() + 1);
             }
         }
 
-        org.apache.kafka.clients.consumer.ConsumerRecords<K, V> copy = new ConsumerRecords<K, V>(this.records);
-        this.records = new HashMap<TopicPartition, List<org.apache.kafka.clients.consumer.ConsumerRecord<K, V>>>();
+        ConsumerRecords<K, V> copy = new ConsumerRecords<K, V>(this.records);
+        this.records = new HashMap<TopicPartition, List<ConsumerRecord<K, V>>>();
         return copy;
     }
 
-    public void addRecord(org.apache.kafka.clients.consumer.ConsumerRecord<K, V> record) {
+    public void addRecord(ConsumerRecord<K, V> record) {
         ensureNotClosed();
         TopicPartition tp = new TopicPartition(record.topic(), record.partition());
         Set<TopicPartition> currentAssigned = new HashSet<>(this.subscriptions.assignedPartitions());
         if (!currentAssigned.contains(tp))
             throw new IllegalStateException("Cannot add records for a partition that is not assigned to the consumer");
-        List<org.apache.kafka.clients.consumer.ConsumerRecord<K, V>> recs = this.records.get(tp);
+        List<ConsumerRecord<K, V>> recs = this.records.get(tp);
         if (recs == null) {
             recs = new ArrayList<ConsumerRecord<K, V>>();
             this.records.put(tp, recs);
@@ -185,9 +185,9 @@ public class MockConsumer<K, V> implements Consumer<K, V> {
     }
 
     @Override
-    public void commitAsync(Map<TopicPartition, org.apache.kafka.clients.consumer.OffsetAndMetadata> offsets, OffsetCommitCallback callback) {
+    public void commitAsync(Map<TopicPartition, org.apache.shade.kafka.clients.consumer.OffsetAndMetadata> offsets, OffsetCommitCallback callback) {
         ensureNotClosed();
-        for (Map.Entry<TopicPartition, org.apache.kafka.clients.consumer.OffsetAndMetadata> entry : offsets.entrySet())
+        for (Map.Entry<TopicPartition, org.apache.shade.kafka.clients.consumer.OffsetAndMetadata> entry : offsets.entrySet())
             subscriptions.committed(entry.getKey(), entry.getValue());
         if (callback != null) {
             callback.onComplete(offsets, null);
@@ -195,7 +195,7 @@ public class MockConsumer<K, V> implements Consumer<K, V> {
     }
 
     @Override
-    public void commitSync(Map<TopicPartition, org.apache.kafka.clients.consumer.OffsetAndMetadata> offsets) {
+    public void commitSync(Map<TopicPartition, org.apache.shade.kafka.clients.consumer.OffsetAndMetadata> offsets) {
         commitAsync(offsets, null);
     }
 

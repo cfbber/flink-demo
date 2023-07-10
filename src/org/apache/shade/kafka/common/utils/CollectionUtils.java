@@ -12,7 +12,7 @@
  */
 package org.apache.shade.kafka.common.utils;
 
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.TopicPartition;
 
 import java.util.ArrayList;
 import java.util.HashMap;

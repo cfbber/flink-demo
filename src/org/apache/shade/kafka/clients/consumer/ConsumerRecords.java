@@ -12,7 +12,7 @@
  */
 package org.apache.shade.kafka.clients.consumer;
 
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.TopicPartition;
 import org.apache.shade.kafka.common.utils.AbstractIterator;
 
 import java.util.ArrayList;

@@ -12,7 +12,7 @@
  */
 package org.apache.shade.kafka.clients.consumer;
 
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.TopicPartition;
 
 import java.util.Map;
 import java.util.Set;

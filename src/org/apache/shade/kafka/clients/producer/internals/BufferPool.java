@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.apache.kafka.common.MetricName;
+import org.apache.shade.kafka.common.MetricName;
 import org.apache.shade.kafka.common.errors.TimeoutException;
 import org.apache.shade.kafka.common.metrics.Metrics;
 import org.apache.shade.kafka.common.metrics.Sensor;

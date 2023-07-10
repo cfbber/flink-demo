@@ -16,7 +16,7 @@
  */
 package org.apache.shade.kafka.clients.consumer.internals;
 
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.TopicPartition;
 import org.apache.shade.kafka.common.protocol.types.ArrayOf;
 import org.apache.shade.kafka.common.protocol.types.Field;
 import org.apache.shade.kafka.common.protocol.types.Schema;

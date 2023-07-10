@@ -16,7 +16,7 @@
  */
 package org.apache.shade.kafka.clients.consumer;
 
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.TopicPartition;
 import org.apache.shade.kafka.clients.consumer.internals.AbstractPartitionAssignor;
 
 import java.util.ArrayList;

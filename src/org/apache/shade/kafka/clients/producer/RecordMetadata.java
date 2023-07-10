@@ -16,7 +16,7 @@
  */
 package org.apache.shade.kafka.clients.producer;
 
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.TopicPartition;
 
 /**
  * The metadata for a record that has been acknowledged by the server

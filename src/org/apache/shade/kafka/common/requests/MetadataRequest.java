@@ -13,8 +13,8 @@
 package org.apache.shade.kafka.common.requests;
 
 import org.apache.shade.kafka.common.Cluster;
-import org.apache.kafka.common.Node;
-import org.apache.kafka.common.PartitionInfo;
+import org.apache.shade.kafka.common.Node;
+import org.apache.shade.kafka.common.PartitionInfo;
 import org.apache.shade.kafka.common.protocol.ApiKeys;
 import org.apache.shade.kafka.common.protocol.Errors;
 import org.apache.shade.kafka.common.protocol.ProtoUtils;

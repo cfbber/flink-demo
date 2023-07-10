@@ -12,7 +12,7 @@
  */
 package org.apache.shade.kafka.common.requests;
 
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.TopicPartition;
 import org.apache.shade.kafka.common.protocol.ApiKeys;
 import org.apache.shade.kafka.common.protocol.ProtoUtils;
 import org.apache.shade.kafka.common.protocol.types.Schema;

@@ -15,9 +15,9 @@ package org.apache.shade.kafka.clients.producer.internals;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.kafka.clients.producer.Callback;
-import org.apache.kafka.clients.producer.RecordMetadata;
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.clients.producer.Callback;
+import org.apache.shade.kafka.clients.producer.RecordMetadata;
+import org.apache.shade.kafka.common.TopicPartition;
 import org.apache.shade.kafka.common.errors.TimeoutException;
 import org.apache.shade.kafka.common.record.MemoryRecords;
 import org.apache.shade.kafka.common.record.Record;

@@ -14,7 +14,7 @@
 package org.apache.shade.kafka.clients.consumer.internals;
 
 import org.apache.shade.kafka.clients.consumer.ConsumerRebalanceListener;
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.TopicPartition;
 
 import java.util.Collection;
 

@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.shade.kafka.clients.producer.Partitioner;
 import org.apache.shade.kafka.common.Cluster;
-import org.apache.kafka.common.PartitionInfo;
+import org.apache.shade.kafka.common.PartitionInfo;
 import org.apache.shade.kafka.common.utils.Utils;
 
 /**
