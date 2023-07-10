@@ -32,10 +32,10 @@ import org.apache.shade.flink.streaming.connectors.kafka.internals.KafkaTopicPar
 import org.apache.flink.streaming.runtime.tasks.ProcessingTimeService;
 import org.apache.flink.util.SerializedValue;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.OffsetAndMetadata;
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.clients.consumer.ConsumerRecord;
+import org.apache.shade.kafka.clients.consumer.ConsumerRecords;
+import org.apache.shade.kafka.clients.consumer.OffsetAndMetadata;
+import org.apache.shade.kafka.common.TopicPartition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

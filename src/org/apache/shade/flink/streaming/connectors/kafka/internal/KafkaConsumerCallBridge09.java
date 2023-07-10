@@ -20,8 +20,8 @@ package org.apache.shade.flink.streaming.connectors.kafka.internal;
 
 import org.apache.flink.annotation.Internal;
 
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.TopicPartition;
+import org.apache.shade.kafka.clients.consumer.KafkaConsumer;
+import org.apache.shade.kafka.common.TopicPartition;
 
 import java.util.List;
 

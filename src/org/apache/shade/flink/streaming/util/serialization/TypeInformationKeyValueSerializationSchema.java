@@ -29,7 +29,7 @@ import org.apache.flink.core.memory.DataInputDeserializer;
 import org.apache.flink.core.memory.DataOutputSerializer;
 import org.apache.shade.flink.streaming.connectors.kafka.KafkaDeserializationSchema;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.shade.kafka.clients.consumer.ConsumerRecord;
 
 import java.io.IOException;
 

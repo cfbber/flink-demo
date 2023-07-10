@@ -21,7 +21,7 @@ package org.apache.shade.flink.streaming.connectors.kafka.internal;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.util.ExceptionUtils;
 
-import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.shade.kafka.clients.consumer.ConsumerRecords;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;

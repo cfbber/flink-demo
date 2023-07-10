@@ -22,8 +22,8 @@ import org.apache.shade.flink.streaming.connectors.kafka.internals.AbstractParti
 import org.apache.shade.flink.streaming.connectors.kafka.internals.KafkaTopicPartition;
 import org.apache.shade.flink.streaming.connectors.kafka.internals.KafkaTopicsDescriptor;
 
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.PartitionInfo;
+import org.apache.shade.kafka.clients.consumer.KafkaConsumer;
+import org.apache.shade.kafka.common.PartitionInfo;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -62,7 +62,7 @@ public class Kafka09PartitionDiscoverer extends AbstractPartitionDiscoverer {
 	protected List<String> getAllTopics() throws WakeupException {
 		try {
 			return new ArrayList<>(kafkaConsumer.listTopics().keySet());
-		} catch (org.apache.kafka.common.errors.WakeupException e) {
+		} catch (org.apache.shade.kafka.common.errors.WakeupException e) {
 			// rethrow our own wakeup exception
 			throw new WakeupException();
 		}
@@ -84,7 +84,7 @@ public class Kafka09PartitionDiscoverer extends AbstractPartitionDiscoverer {
 					partitions.add(new KafkaTopicPartition(partitionInfo.topic(), partitionInfo.partition()));
 				}
 			}
-		} catch (org.apache.kafka.common.errors.WakeupException e) {
+		} catch (org.apache.shade.kafka.common.errors.WakeupException e) {
 			// rethrow our own wakeup exception
 			throw new WakeupException();
 		}

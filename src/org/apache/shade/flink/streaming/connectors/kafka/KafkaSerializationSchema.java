@@ -19,7 +19,7 @@ package org.apache.shade.flink.streaming.connectors.kafka;
 
 import org.apache.flink.annotation.PublicEvolving;
 
-import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.shade.kafka.clients.producer.ProducerRecord;
 
 import javax.annotation.Nullable;
 

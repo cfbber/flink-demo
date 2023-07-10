@@ -29,15 +29,15 @@ import org.apache.shade.flink.streaming.connectors.kafka.internals.KafkaTopicPar
 import org.apache.shade.flink.streaming.connectors.kafka.internals.KafkaTopicPartitionStateSentinel;
 import org.apache.shade.flink.streaming.connectors.kafka.internals.metrics.KafkaMetricWrapper;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.consumer.OffsetAndMetadata;
-import org.apache.kafka.clients.consumer.OffsetCommitCallback;
-import org.apache.kafka.common.Metric;
-import org.apache.kafka.common.MetricName;
-import org.apache.kafka.common.TopicPartition;
-import org.apache.kafka.common.errors.WakeupException;
+import org.apache.shade.kafka.clients.consumer.ConsumerRecord;
+import org.apache.shade.kafka.clients.consumer.ConsumerRecords;
+import org.apache.shade.kafka.clients.consumer.KafkaConsumer;
+import org.apache.shade.kafka.clients.consumer.OffsetAndMetadata;
+import org.apache.shade.kafka.clients.consumer.OffsetCommitCallback;
+import org.apache.shade.kafka.common.Metric;
+import org.apache.shade.kafka.common.MetricName;
+import org.apache.shade.kafka.common.TopicPartition;
+import org.apache.shade.kafka.common.errors.WakeupException;
 import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;

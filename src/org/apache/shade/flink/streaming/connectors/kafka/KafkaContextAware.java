@@ -18,6 +18,7 @@
 package org.apache.shade.flink.streaming.connectors.kafka;
 
 import org.apache.flink.annotation.PublicEvolving;
+import org.apache.shade.kafka.clients.producer.ProducerRecord;
 
 /**
  * An interface for {@link KafkaSerializationSchema KafkaSerializationSchemas} that need information
@@ -53,7 +54,7 @@ public interface KafkaContextAware<T> {
 
 	/**
 	 * Returns the topic that the presented element should be sent to. This is not used for setting
-	 * the topic (this is done via the {@link org.apache.kafka.clients.producer.ProducerRecord} that
+	 * the topic (this is done via the {@link ProducerRecord} that
 	 * is returned from {@link KafkaSerializationSchema#serialize(Object, Long)}, it is only used
 	 * for getting the available partitions that are presented to {@link #setPartitions(int[])}.
 	 */

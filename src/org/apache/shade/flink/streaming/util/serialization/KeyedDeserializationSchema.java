@@ -20,7 +20,7 @@ package org.apache.shade.flink.streaming.util.serialization;
 import org.apache.flink.annotation.PublicEvolving;
 import org.apache.shade.flink.streaming.connectors.kafka.KafkaDeserializationSchema;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.shade.kafka.clients.consumer.ConsumerRecord;
 
 import java.io.IOException;
 

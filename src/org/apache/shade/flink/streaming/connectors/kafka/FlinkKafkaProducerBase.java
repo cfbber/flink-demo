@@ -36,15 +36,15 @@ import org.apache.shade.flink.streaming.util.serialization.KeyedSerializationSch
 import org.apache.flink.util.NetUtils;
 import org.apache.flink.util.SerializableObject;
 
-import org.apache.kafka.clients.producer.Callback;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
-import org.apache.kafka.common.Metric;
-import org.apache.kafka.common.MetricName;
-import org.apache.kafka.common.PartitionInfo;
-import org.apache.kafka.common.serialization.ByteArraySerializer;
+import org.apache.shade.kafka.clients.producer.Callback;
+import org.apache.shade.kafka.clients.producer.KafkaProducer;
+import org.apache.shade.kafka.clients.producer.ProducerConfig;
+import org.apache.shade.kafka.clients.producer.ProducerRecord;
+import org.apache.shade.kafka.clients.producer.RecordMetadata;
+import org.apache.shade.kafka.common.Metric;
+import org.apache.shade.kafka.common.MetricName;
+import org.apache.shade.kafka.common.PartitionInfo;
+import org.apache.shade.kafka.common.serialization.ByteArraySerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

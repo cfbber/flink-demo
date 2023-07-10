@@ -20,7 +20,7 @@ package org.apache.shade.flink.streaming.connectors.kafka;
 import org.apache.flink.annotation.PublicEvolving;
 import org.apache.flink.api.java.typeutils.ResultTypeQueryable;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.shade.kafka.clients.consumer.ConsumerRecord;
 
 import java.io.Serializable;
 

@@ -26,9 +26,9 @@ import org.apache.flink.metrics.Gauge;
  */
 @Internal
 public class KafkaMetricWrapper implements Gauge<Double> {
-	private final org.apache.kafka.common.Metric kafkaMetric;
+	private final org.apache.shade.kafka.common.Metric kafkaMetric;
 
-	public KafkaMetricWrapper(org.apache.kafka.common.Metric metric) {
+	public KafkaMetricWrapper(org.apache.shade.kafka.common.Metric metric) {
 		this.kafkaMetric = metric;
 	}
 

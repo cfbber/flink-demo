@@ -35,8 +35,8 @@ import org.apache.shade.flink.streaming.connectors.kafka.internals.KafkaTopicsDe
 import org.apache.flink.util.PropertiesUtil;
 import org.apache.flink.util.SerializedValue;
 
-import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.shade.kafka.clients.consumer.ConsumerConfig;
+import org.apache.shade.kafka.common.serialization.ByteArrayDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

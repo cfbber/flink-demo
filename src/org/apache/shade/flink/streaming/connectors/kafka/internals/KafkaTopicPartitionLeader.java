@@ -19,7 +19,7 @@ package org.apache.shade.flink.streaming.connectors.kafka.internals;
 
 import org.apache.flink.annotation.Internal;
 
-import org.apache.kafka.common.Node;
+import org.apache.shade.kafka.common.Node;
 
 import java.io.Serializable;
 
