@@ -1,4 +1,4 @@
-package net.jpountz.lz4;
+package org.apache.shade.jpountz.xxhash;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,14 +14,13 @@ package net.jpountz.lz4;
  * limitations under the License.
  */
 
-/**
- * @deprecated Use {@link LZ4SafeDecompressor} instead.
- */
-@Deprecated
-public interface LZ4UnknownSizeDecompressor {
+enum XXHashConstants {
+  ;
 
-  int decompress(byte[] src, int srcOff, int srcLen, byte[] dest, int destOff, int maxDestLen);
-
-  int decompress(byte[] src, int srcOff, int srcLen, byte[] dest, int destOff);
+  static final int PRIME1 = -1640531535;
+  static final int PRIME2 = -2048144777;
+  static final int PRIME3 = -1028477379;
+  static final int PRIME4 = 668265263;
+  static final int PRIME5 = 374761393;
 
 }

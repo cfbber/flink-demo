@@ -1,4 +1,4 @@
-package net.jpountz.lz4;
+package org.apache.shade.jpountz.lz4;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,25 +14,26 @@ package net.jpountz.lz4;
  * limitations under the License.
  */
 
-import static net.jpountz.util.Utils.checkRange;
+import org.apache.shade.jpountz.util.Utils;
+
+import static org.apache.shade.jpountz.util.Utils.checkRange;
 
 /**
- * {@link LZ4FastDecompressor} implemented with JNI bindings to the original C
+ * {@link org.apache.shade.jpountz.lz4.LZ4SafeDecompressor} implemented with JNI bindings to the original C
  * implementation of LZ4.
  */
-final class LZ4JNIFastDecompressor extends LZ4FastDecompressor {
+final class LZ4JNISafeDecompressor extends org.apache.shade.jpountz.lz4.LZ4SafeDecompressor {
 
-  public static final LZ4JNIFastDecompressor INSTANCE = new LZ4JNIFastDecompressor();
+  public static final LZ4SafeDecompressor INSTANCE = new LZ4JNISafeDecompressor();
 
   @Override
-  public final int decompress(byte[] src, int srcOff, byte[] dest, int destOff, int destLen) {
-    checkRange(src, srcOff);
-    checkRange(dest, destOff, destLen);
-    final int result = LZ4JNI.LZ4_decompress_fast(src, srcOff, dest, destOff, destLen);
+  public final int decompress(byte[] src, int srcOff, int srcLen, byte[] dest, int destOff, int maxDestLen) {
+    Utils.checkRange(src, srcOff, srcLen);
+    Utils.checkRange(dest, destOff, maxDestLen);
+    final int result = org.apache.shade.jpountz.lz4.LZ4JNI.LZ4_decompress_safe(src, srcOff, srcLen, dest, destOff, maxDestLen);
     if (result < 0) {
       throw new LZ4Exception("Error decoding offset " + (srcOff - result) + " of input buffer");
     }
     return result;
   }
-
 }

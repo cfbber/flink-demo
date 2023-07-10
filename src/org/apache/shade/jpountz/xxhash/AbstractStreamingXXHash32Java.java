@@ -1,4 +1,4 @@
-package net.jpountz.xxhash;
+package org.apache.shade.jpountz.xxhash;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,13 +14,26 @@ package net.jpountz.xxhash;
  * limitations under the License.
  */
 
-enum XXHashConstants {
-  ;
+abstract class AbstractStreamingXXHash32Java extends StreamingXXHash32 {
 
-  static final int PRIME1 = -1640531535;
-  static final int PRIME2 = -2048144777;
-  static final int PRIME3 = -1028477379;
-  static final int PRIME4 = 668265263;
-  static final int PRIME5 = 374761393;
+  int v1, v2, v3, v4, memSize;
+  long totalLen;
+  final byte[] memory;
+
+  AbstractStreamingXXHash32Java(int seed) {
+    super(seed);
+    memory = new byte[16];
+    reset();
+  }
+
+  @Override
+  public void reset() {
+    v1 = seed + XXHashConstants.PRIME1 + XXHashConstants.PRIME2;
+    v2 = seed + XXHashConstants.PRIME2;
+    v3 = seed + 0;
+    v4 = seed - XXHashConstants.PRIME1;
+    totalLen = 0;
+    memSize = 0;
+  }
 
 }

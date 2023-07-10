@@ -1,4 +1,4 @@
-package net.jpountz.lz4;
+package org.apache.shade.jpountz.lz4;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +14,17 @@ package net.jpountz.lz4;
  * limitations under the License.
  */
 
-import static net.jpountz.lz4.LZ4Constants.HASH_LOG;
-import static net.jpountz.lz4.LZ4Constants.HASH_LOG_64K;
-import static net.jpountz.lz4.LZ4Constants.HASH_LOG_HC;
-import static net.jpountz.lz4.LZ4Constants.LAST_LITERALS;
-import static net.jpountz.lz4.LZ4Constants.MIN_MATCH;
-import static net.jpountz.lz4.LZ4Constants.ML_BITS;
-import static net.jpountz.lz4.LZ4Constants.ML_MASK;
-import static net.jpountz.lz4.LZ4Constants.RUN_MASK;
-import static net.jpountz.util.Utils.readInt;
+import org.apache.shade.jpountz.util.Utils;
+
+import static org.apache.shade.jpountz.lz4.LZ4Constants.HASH_LOG;
+import static org.apache.shade.jpountz.lz4.LZ4Constants.HASH_LOG_64K;
+import static org.apache.shade.jpountz.lz4.LZ4Constants.HASH_LOG_HC;
+import static org.apache.shade.jpountz.lz4.LZ4Constants.LAST_LITERALS;
+import static org.apache.shade.jpountz.lz4.LZ4Constants.MIN_MATCH;
+import static org.apache.shade.jpountz.lz4.LZ4Constants.ML_BITS;
+import static org.apache.shade.jpountz.lz4.LZ4Constants.ML_MASK;
+import static org.apache.shade.jpountz.lz4.LZ4Constants.RUN_MASK;
+import static org.apache.shade.jpountz.util.Utils.readInt;
 
 enum LZ4Utils {
   ;
@@ -51,11 +53,11 @@ enum LZ4Utils {
   }
 
   static int hash(byte[] buf, int i) {
-    return hash(readInt(buf, i));
+    return hash(Utils.readInt(buf, i));
   }
 
   static int hash64k(byte[] buf, int i) {
-    return hash64k(readInt(buf, i));
+    return hash64k(Utils.readInt(buf, i));
   }
 
   static boolean readIntEquals(byte[] buf, int i, int j) {
@@ -108,7 +110,7 @@ enum LZ4Utils {
         copy8Bytes(src, sOff + i, dest, dOff + i);
       }
     } catch (ArrayIndexOutOfBoundsException e) {
-      throw new LZ4Exception("Malformed input at offset " + sOff);
+      throw new org.apache.shade.jpountz.lz4.LZ4Exception("Malformed input at offset " + sOff);
     }
   }
 
@@ -117,7 +119,7 @@ enum LZ4Utils {
     final int tokenOff = dOff++;
 
     if (dOff + runLen + (2 + 1 + LAST_LITERALS) + (runLen >>> 8) > destEnd) {
-      throw new LZ4Exception("maxDestLen is too small");
+      throw new org.apache.shade.jpountz.lz4.LZ4Exception("maxDestLen is too small");
     }
 
     int token;
@@ -140,7 +142,7 @@ enum LZ4Utils {
     // encode match len
     matchLen -= 4;
     if (dOff + (1 + LAST_LITERALS) + (matchLen >>> 8) > destEnd) {
-      throw new LZ4Exception("maxDestLen is too small");
+      throw new org.apache.shade.jpountz.lz4.LZ4Exception("maxDestLen is too small");
     }
     if (matchLen >= ML_MASK) {
       token |= ML_MASK;

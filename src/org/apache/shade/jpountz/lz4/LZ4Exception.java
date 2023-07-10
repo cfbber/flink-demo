@@ -1,4 +1,4 @@
-package net.jpountz.xxhash;
+package org.apache.shade.jpountz.lz4;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +14,23 @@ package net.jpountz.xxhash;
  * limitations under the License.
  */
 
-import net.jpountz.util.Native;
+/**
+ * LZ4 compression or decompression error.
+ */
+public class LZ4Exception extends RuntimeException {
 
-enum XXHashJNI {
-  ;
+  private static final long serialVersionUID = 1L;
 
-  static {
-    Native.load();
-    init();
+  public LZ4Exception(String msg, Throwable t) {
+    super(msg, t);
   }
 
-  private static native void init();
-  static native int XXH32(byte[] input, int offset, int len, int seed);
-  static native long XXH32_init(int seed);
-  static native void XXH32_update(long state, byte[] input, int offset, int len);
-  static native int XXH32_intermediateDigest(long state);
-  static native int XXH32_digest(long state);
-  static native void XXH32_free(long state);
+  public LZ4Exception(String msg) {
+    super(msg);
+  }
+
+  public LZ4Exception() {
+    super();
+  }
 
 }

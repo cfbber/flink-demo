@@ -1,4 +1,4 @@
-package net.jpountz.lz4;
+package org.apache.shade.jpountz.lz4;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,13 +14,13 @@ package net.jpountz.lz4;
  * limitations under the License.
  */
 
-import static net.jpountz.lz4.LZ4BlockOutputStream.COMPRESSION_LEVEL_BASE;
-import static net.jpountz.lz4.LZ4BlockOutputStream.COMPRESSION_METHOD_LZ4;
-import static net.jpountz.lz4.LZ4BlockOutputStream.COMPRESSION_METHOD_RAW;
-import static net.jpountz.lz4.LZ4BlockOutputStream.DEFAULT_SEED;
-import static net.jpountz.lz4.LZ4BlockOutputStream.HEADER_LENGTH;
-import static net.jpountz.lz4.LZ4BlockOutputStream.MAGIC;
-import static net.jpountz.lz4.LZ4BlockOutputStream.MAGIC_LENGTH;
+import static org.apache.shade.jpountz.lz4.LZ4BlockOutputStream.COMPRESSION_LEVEL_BASE;
+import static org.apache.shade.jpountz.lz4.LZ4BlockOutputStream.COMPRESSION_METHOD_LZ4;
+import static org.apache.shade.jpountz.lz4.LZ4BlockOutputStream.COMPRESSION_METHOD_RAW;
+import static org.apache.shade.jpountz.lz4.LZ4BlockOutputStream.DEFAULT_SEED;
+import static org.apache.shade.jpountz.lz4.LZ4BlockOutputStream.HEADER_LENGTH;
+import static org.apache.shade.jpountz.lz4.LZ4BlockOutputStream.MAGIC;
+import static org.apache.shade.jpountz.lz4.LZ4BlockOutputStream.MAGIC_LENGTH;
 
 import java.io.EOFException;
 import java.io.FilterInputStream;
@@ -28,14 +28,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.Checksum;
 
-import net.jpountz.util.Utils;
-import net.jpountz.xxhash.StreamingXXHash32;
-import net.jpountz.xxhash.XXHash32;
-import net.jpountz.xxhash.XXHashFactory;
+import org.apache.shade.jpountz.xxhash.XXHashFactory;
+import org.apache.shade.jpountz.util.Utils;
+import org.apache.shade.jpountz.xxhash.StreamingXXHash32;
+import org.apache.shade.jpountz.xxhash.XXHash32;
 
 /**
  * {@link InputStream} implementation to decode data written with
- * {@link LZ4BlockOutputStream}. This class is not thread-safe and does not
+ * {@link org.apache.shade.jpountz.lz4.LZ4BlockOutputStream}. This class is not thread-safe and does not
  * support {@link #mark(int)}/{@link #reset()}.
  * @see LZ4BlockOutputStream
  */
@@ -108,7 +108,7 @@ public final class LZ4BlockInputStream extends FilterInputStream {
 
   @Override
   public int read(byte[] b, int off, int len) throws IOException {
-    Utils.checkRange(b, off, len);
+    org.apache.shade.jpountz.util.Utils.checkRange(b, off, len);
     if (finished) {
       return -1;
     }
@@ -158,8 +158,8 @@ public final class LZ4BlockInputStream extends FilterInputStream {
     if (compressionMethod != COMPRESSION_METHOD_RAW && compressionMethod != COMPRESSION_METHOD_LZ4) {
       throw new IOException("Stream is corrupted");
     }
-    final int compressedLen = Utils.readIntLE(compressedBuffer, MAGIC_LENGTH + 1);
-    originalLen = Utils.readIntLE(compressedBuffer, MAGIC_LENGTH + 5);
+    final int compressedLen = org.apache.shade.jpountz.util.Utils.readIntLE(compressedBuffer, MAGIC_LENGTH + 1);
+    originalLen = org.apache.shade.jpountz.util.Utils.readIntLE(compressedBuffer, MAGIC_LENGTH + 5);
     final int check = Utils.readIntLE(compressedBuffer, MAGIC_LENGTH + 9);
     assert HEADER_LENGTH == MAGIC_LENGTH + 13;
     if (originalLen > 1 << compressionLevel

@@ -1,4 +1,4 @@
-package net.jpountz.xxhash;
+package org.apache.shade.jpountz.xxhash;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +14,10 @@ package net.jpountz.xxhash;
  * limitations under the License.
  */
 
+import org.apache.shade.jpountz.util.Native;
+
 import java.lang.reflect.Field;
 import java.util.Random;
-
-import net.jpountz.util.Native;
 
 /**
  * Entry point to get {@link XXHash32} and {@link StreamingXXHash32} instances.
@@ -121,7 +121,7 @@ public final class XXHashFactory {
    * using this method.
    */
   public static XXHashFactory fastestInstance() {
-    if (Native.isLoaded()
+    if (org.apache.shade.jpountz.util.Native.isLoaded()
         || Native.class.getClassLoader() == ClassLoader.getSystemClassLoader()) {
       try {
         return nativeInstance();

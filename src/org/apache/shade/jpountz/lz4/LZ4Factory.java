@@ -1,4 +1,4 @@
-package net.jpountz.lz4;
+package org.apache.shade.jpountz.lz4;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +14,10 @@ package net.jpountz.lz4;
  * limitations under the License.
  */
 
+import org.apache.shade.jpountz.util.Native;
+
 import java.lang.reflect.Field;
 import java.util.Arrays;
-
-import net.jpountz.util.Native;
 
 /**
  * Entry point for the LZ4 API.
@@ -123,7 +123,7 @@ public final class LZ4Factory {
    * using this method.
    */
   public static LZ4Factory fastestInstance() {
-    if (Native.isLoaded()
+    if (org.apache.shade.jpountz.util.Native.isLoaded()
         || Native.class.getClassLoader() == ClassLoader.getSystemClassLoader()) {
       try {
         return nativeInstance();
@@ -143,8 +143,8 @@ public final class LZ4Factory {
   }
 
   private final String impl;
-  private final LZ4Compressor fastCompressor;
-  private final LZ4Compressor highCompressor;
+  private final org.apache.shade.jpountz.lz4.LZ4Compressor fastCompressor;
+  private final org.apache.shade.jpountz.lz4.LZ4Compressor highCompressor;
   private final LZ4FastDecompressor fastDecompressor;
   private final LZ4SafeDecompressor safeDecompressor;
 
@@ -157,7 +157,7 @@ public final class LZ4Factory {
 
     // quickly test that everything works as expected
     final byte[] original = new byte[] {'a','b','c','d',' ',' ',' ',' ',' ',' ','a','b','c','d','e','f','g','h','i','j'};
-    for (LZ4Compressor compressor : Arrays.asList(fastCompressor, highCompressor)) {
+    for (org.apache.shade.jpountz.lz4.LZ4Compressor compressor : Arrays.asList(fastCompressor, highCompressor)) {
       final int maxCompressedLength = compressor.maxCompressedLength(original.length);
       final byte[] compressed = new byte[maxCompressedLength];
       final int compressedLength = compressor.compress(original, 0, original.length, compressed, 0, maxCompressedLength);
@@ -175,12 +175,12 @@ public final class LZ4Factory {
 
   }
 
-  /** Return a blazing fast {@link LZ4Compressor}. */
-  public LZ4Compressor fastCompressor() {
+  /** Return a blazing fast {@link org.apache.shade.jpountz.lz4.LZ4Compressor}. */
+  public org.apache.shade.jpountz.lz4.LZ4Compressor fastCompressor() {
     return fastCompressor;
   }
 
-  /** Return a {@link LZ4Compressor} which requires more memory than
+  /** Return a {@link org.apache.shade.jpountz.lz4.LZ4Compressor} which requires more memory than
    * {@link #fastCompressor()} and is slower but compresses more efficiently. */
   public LZ4Compressor highCompressor() {
     return highCompressor;

@@ -1,4 +1,4 @@
-package net.jpountz.xxhash;
+package org.apache.shade.jpountz.xxhash;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +15,11 @@ package net.jpountz.xxhash;
  */
 
 
-final class StreamingXXHash32JNI extends StreamingXXHash32 {
+final class StreamingXXHash32JNI extends org.apache.shade.jpountz.xxhash.StreamingXXHash32 {
 
-  static class Factory implements StreamingXXHash32.Factory {
+  static class Factory implements org.apache.shade.jpountz.xxhash.StreamingXXHash32.Factory {
 
-    public static final StreamingXXHash32.Factory INSTANCE = new Factory();
+    public static final org.apache.shade.jpountz.xxhash.StreamingXXHash32.Factory INSTANCE = new Factory();
 
     @Override
     public StreamingXXHash32 newStreamingHash(int seed) {
@@ -32,7 +32,7 @@ final class StreamingXXHash32JNI extends StreamingXXHash32 {
 
   StreamingXXHash32JNI(int seed) {
     super(seed);
-    state = XXHashJNI.XXH32_init(seed);
+    state = org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_init(seed);
   }
 
   private void checkState() {
@@ -44,27 +44,27 @@ final class StreamingXXHash32JNI extends StreamingXXHash32 {
   @Override
   public void reset() {
     checkState();
-    XXHashJNI.XXH32_free(state);
-    state = XXHashJNI.XXH32_init(seed);
+    org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_free(state);
+    state = org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_init(seed);
   }
 
   @Override
   public int getValue() {
     checkState();
-    return XXHashJNI.XXH32_intermediateDigest(state);
+    return org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_intermediateDigest(state);
   }
 
   @Override
   public void update(byte[] bytes, int off, int len) {
     checkState();
-    XXHashJNI.XXH32_update(state, bytes, off, len);
+    org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_update(state, bytes, off, len);
   }
 
   @Override
   protected void finalize() throws Throwable {
     super.finalize();
     // free memory
-    XXHashJNI.XXH32_free(state);
+    org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_free(state);
     state = 0;
   }
 

@@ -1,4 +1,4 @@
-package net.jpountz.xxhash;
+package org.apache.shade.jpountz.xxhash;
 
 import java.util.zip.Checksum;
 

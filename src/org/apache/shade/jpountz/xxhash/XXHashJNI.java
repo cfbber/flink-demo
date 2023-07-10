@@ -1,4 +1,4 @@
-package net.jpountz.xxhash;
+package org.apache.shade.jpountz.xxhash;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +14,22 @@ package net.jpountz.xxhash;
  * limitations under the License.
  */
 
-import static net.jpountz.util.Utils.checkRange;
+import org.apache.shade.jpountz.util.Native;
 
-final class XXHash32JNI extends XXHash32 {
+enum XXHashJNI {
+  ;
 
-  public static final XXHash32 INSTANCE = new XXHash32JNI();
-
-  @Override
-  public int hash(byte[] buf, int off, int len, int seed) {
-    checkRange(buf, off, len);
-    return XXHashJNI.XXH32(buf, off, len, seed);
+  static {
+    Native.load();
+    init();
   }
+
+  private static native void init();
+  static native int XXH32(byte[] input, int offset, int len, int seed);
+  static native long XXH32_init(int seed);
+  static native void XXH32_update(long state, byte[] input, int offset, int len);
+  static native int XXH32_intermediateDigest(long state);
+  static native int XXH32_digest(long state);
+  static native void XXH32_free(long state);
 
 }

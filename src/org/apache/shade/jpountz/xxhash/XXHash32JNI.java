@@ -1,4 +1,4 @@
-package net.jpountz.xxhash;
+package org.apache.shade.jpountz.xxhash;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,29 +14,16 @@ package net.jpountz.xxhash;
  * limitations under the License.
  */
 
-import static net.jpountz.xxhash.XXHashConstants.PRIME1;
-import static net.jpountz.xxhash.XXHashConstants.PRIME2;
+import static org.apache.shade.jpountz.util.Utils.checkRange;
 
-abstract class AbstractStreamingXXHash32Java extends StreamingXXHash32 {
+final class XXHash32JNI extends XXHash32 {
 
-  int v1, v2, v3, v4, memSize;
-  long totalLen;
-  final byte[] memory;
-
-  AbstractStreamingXXHash32Java(int seed) {
-    super(seed);
-    memory = new byte[16];
-    reset();
-  }
+  public static final XXHash32 INSTANCE = new XXHash32JNI();
 
   @Override
-  public void reset() {
-    v1 = seed + PRIME1 + PRIME2;
-    v2 = seed + PRIME2;
-    v3 = seed + 0;
-    v4 = seed - PRIME1;
-    totalLen = 0;
-    memSize = 0;
+  public int hash(byte[] buf, int off, int len, int seed) {
+    checkRange(buf, off, len);
+    return org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32(buf, off, len, seed);
   }
 
 }
