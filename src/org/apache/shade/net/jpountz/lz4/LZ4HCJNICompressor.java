@@ -1,4 +1,4 @@
-package org.apache.shade.jpountz.lz4;
+package org.apache.shade.net.jpountz.lz4;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,26 +14,27 @@ package org.apache.shade.jpountz.lz4;
  * limitations under the License.
  */
 
-import org.apache.shade.jpountz.util.Utils;
+import org.apache.shade.net.jpountz.util.Utils;
 
-import static org.apache.shade.jpountz.util.Utils.checkRange;
+import static org.apache.shade.net.jpountz.util.Utils.checkRange;
 
 /**
- * Fast {@link LZ4FastCompressor}s implemented with JNI bindings to the original C
- * implementation of LZ4.
+ * High compression {@link org.apache.shade.net.jpountz.lz4.LZ4Compressor}s implemented with JNI bindings to the
+ * original C implementation of LZ4.
  */
-final class LZ4JNICompressor extends org.apache.shade.jpountz.lz4.LZ4Compressor {
+final class LZ4HCJNICompressor extends org.apache.shade.net.jpountz.lz4.LZ4Compressor {
 
-  public static final LZ4Compressor INSTANCE = new LZ4JNICompressor();
+  public static final LZ4Compressor INSTANCE = new LZ4HCJNICompressor();
 
   @Override
   public int compress(byte[] src, int srcOff, int srcLen, byte[] dest, int destOff, int maxDestLen) {
     Utils.checkRange(src, srcOff, srcLen);
     Utils.checkRange(dest, destOff, maxDestLen);
-    final int result = org.apache.shade.jpountz.lz4.LZ4JNI.LZ4_compress_limitedOutput(src, srcOff, srcLen, dest, destOff, maxDestLen);
+    final int result = org.apache.shade.net.jpountz.lz4.LZ4JNI.LZ4_compressHC(src, srcOff, srcLen, dest, destOff, maxDestLen);
     if (result <= 0) {
-      throw new LZ4Exception("maxDestLen is too small");
+      throw new LZ4Exception();
     }
     return result;
   }
+
 }

@@ -1,4 +1,4 @@
-package org.apache.shade.jpountz.lz4;
+package org.apache.shade.net.jpountz.lz4;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,9 +19,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.zip.Checksum;
 
-import org.apache.shade.jpountz.xxhash.XXHashFactory;
-import org.apache.shade.jpountz.util.Utils;
-import org.apache.shade.jpountz.xxhash.StreamingXXHash32;
+import org.apache.shade.net.jpountz.xxhash.XXHashFactory;
+import org.apache.shade.net.jpountz.util.Utils;
+import org.apache.shade.net.jpountz.xxhash.StreamingXXHash32;
 
 /**
  * Streaming LZ4.
@@ -105,7 +105,7 @@ public final class LZ4BlockOutputStream extends FilterOutputStream {
 
   /**
    * Create a new instance which checks stream integrity using
-   * {@link org.apache.shade.jpountz.xxhash.StreamingXXHash32} and doesn't sync flush.
+   * {@link org.apache.shade.net.jpountz.xxhash.StreamingXXHash32} and doesn't sync flush.
    * @see #LZ4BlockOutputStream(OutputStream, int, LZ4Compressor, Checksum, boolean)
    * @see StreamingXXHash32#asChecksum()
    */

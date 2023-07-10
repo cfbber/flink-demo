@@ -1,4 +1,4 @@
-package org.apache.shade.jpountz.xxhash;
+package org.apache.shade.net.jpountz.xxhash;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +14,22 @@ package org.apache.shade.jpountz.xxhash;
  * limitations under the License.
  */
 
-/**
- * A 32-bits hash.
- * <p>
- * Instances of this class are thread-safe.
- */
-public abstract class XXHash32 {
+import org.apache.shade.net.jpountz.util.Native;
 
-  /**
-   * Compute the 32-bits hash of <code>buf[off:off+len]</code> using seed
-   * <code>seed</code>.
-   */
-  public abstract int hash(byte[] buf, int off, int len, int seed);
+enum XXHashJNI {
+  ;
 
-  @Override
-  public String toString() {
-    return getClass().getSimpleName();
+  static {
+    Native.load();
+    init();
   }
+
+  private static native void init();
+  static native int XXH32(byte[] input, int offset, int len, int seed);
+  static native long XXH32_init(int seed);
+  static native void XXH32_update(long state, byte[] input, int offset, int len);
+  static native int XXH32_intermediateDigest(long state);
+  static native int XXH32_digest(long state);
+  static native void XXH32_free(long state);
 
 }

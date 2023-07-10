@@ -1,4 +1,4 @@
-package org.apache.shade.jpountz.lz4;
+package org.apache.shade.net.jpountz.lz4;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +14,12 @@ package org.apache.shade.jpountz.lz4;
  * limitations under the License.
  */
 
-import org.apache.shade.jpountz.util.Utils;
+import org.apache.shade.net.jpountz.util.Utils;
 
-import static org.apache.shade.jpountz.util.Utils.checkRange;
+import static org.apache.shade.net.jpountz.util.Utils.checkRange;
 
 /**
- * {@link org.apache.shade.jpountz.lz4.LZ4FastDecompressor} implemented with JNI bindings to the original C
+ * {@link org.apache.shade.net.jpountz.lz4.LZ4FastDecompressor} implemented with JNI bindings to the original C
  * implementation of LZ4.
  */
 final class LZ4JNIFastDecompressor extends LZ4FastDecompressor {
@@ -30,7 +30,7 @@ final class LZ4JNIFastDecompressor extends LZ4FastDecompressor {
   public final int decompress(byte[] src, int srcOff, byte[] dest, int destOff, int destLen) {
     Utils.checkRange(src, srcOff);
     Utils.checkRange(dest, destOff, destLen);
-    final int result = org.apache.shade.jpountz.lz4.LZ4JNI.LZ4_decompress_fast(src, srcOff, dest, destOff, destLen);
+    final int result = org.apache.shade.net.jpountz.lz4.LZ4JNI.LZ4_decompress_fast(src, srcOff, dest, destOff, destLen);
     if (result < 0) {
       throw new LZ4Exception("Error decoding offset " + (srcOff - result) + " of input buffer");
     }

@@ -1,4 +1,4 @@
-package org.apache.shade.jpountz.xxhash;
+package org.apache.shade.net.jpountz.xxhash;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +15,11 @@ package org.apache.shade.jpountz.xxhash;
  */
 
 
-final class StreamingXXHash32JNI extends org.apache.shade.jpountz.xxhash.StreamingXXHash32 {
+final class StreamingXXHash32JNI extends org.apache.shade.net.jpountz.xxhash.StreamingXXHash32 {
 
-  static class Factory implements org.apache.shade.jpountz.xxhash.StreamingXXHash32.Factory {
+  static class Factory implements org.apache.shade.net.jpountz.xxhash.StreamingXXHash32.Factory {
 
-    public static final org.apache.shade.jpountz.xxhash.StreamingXXHash32.Factory INSTANCE = new Factory();
+    public static final org.apache.shade.net.jpountz.xxhash.StreamingXXHash32.Factory INSTANCE = new Factory();
 
     @Override
     public StreamingXXHash32 newStreamingHash(int seed) {
@@ -32,7 +32,7 @@ final class StreamingXXHash32JNI extends org.apache.shade.jpountz.xxhash.Streami
 
   StreamingXXHash32JNI(int seed) {
     super(seed);
-    state = org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_init(seed);
+    state = org.apache.shade.net.jpountz.xxhash.XXHashJNI.XXH32_init(seed);
   }
 
   private void checkState() {
@@ -44,27 +44,27 @@ final class StreamingXXHash32JNI extends org.apache.shade.jpountz.xxhash.Streami
   @Override
   public void reset() {
     checkState();
-    org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_free(state);
-    state = org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_init(seed);
+    org.apache.shade.net.jpountz.xxhash.XXHashJNI.XXH32_free(state);
+    state = org.apache.shade.net.jpountz.xxhash.XXHashJNI.XXH32_init(seed);
   }
 
   @Override
   public int getValue() {
     checkState();
-    return org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_intermediateDigest(state);
+    return org.apache.shade.net.jpountz.xxhash.XXHashJNI.XXH32_intermediateDigest(state);
   }
 
   @Override
   public void update(byte[] bytes, int off, int len) {
     checkState();
-    org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_update(state, bytes, off, len);
+    org.apache.shade.net.jpountz.xxhash.XXHashJNI.XXH32_update(state, bytes, off, len);
   }
 
   @Override
   protected void finalize() throws Throwable {
     super.finalize();
     // free memory
-    org.apache.shade.jpountz.xxhash.XXHashJNI.XXH32_free(state);
+    org.apache.shade.net.jpountz.xxhash.XXHashJNI.XXH32_free(state);
     state = 0;
   }
 

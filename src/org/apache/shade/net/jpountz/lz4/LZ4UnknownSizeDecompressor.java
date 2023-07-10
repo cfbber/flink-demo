@@ -1,4 +1,4 @@
-package org.apache.shade.jpountz.xxhash;
+package org.apache.shade.net.jpountz.lz4;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +14,14 @@ package org.apache.shade.jpountz.xxhash;
  * limitations under the License.
  */
 
-import org.apache.shade.jpountz.util.Native;
+/**
+ * @deprecated Use {@link LZ4SafeDecompressor} instead.
+ */
+@Deprecated
+public interface LZ4UnknownSizeDecompressor {
 
-enum XXHashJNI {
-  ;
+  int decompress(byte[] src, int srcOff, int srcLen, byte[] dest, int destOff, int maxDestLen);
 
-  static {
-    Native.load();
-    init();
-  }
-
-  private static native void init();
-  static native int XXH32(byte[] input, int offset, int len, int seed);
-  static native long XXH32_init(int seed);
-  static native void XXH32_update(long state, byte[] input, int offset, int len);
-  static native int XXH32_intermediateDigest(long state);
-  static native int XXH32_digest(long state);
-  static native void XXH32_free(long state);
+  int decompress(byte[] src, int srcOff, int srcLen, byte[] dest, int destOff);
 
 }

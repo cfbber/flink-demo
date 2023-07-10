@@ -1,4 +1,4 @@
-package org.apache.shade.jpountz.xxhash;
+package org.apache.shade.net.jpountz.xxhash;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,26 +14,22 @@ package org.apache.shade.jpountz.xxhash;
  * limitations under the License.
  */
 
-abstract class AbstractStreamingXXHash32Java extends StreamingXXHash32 {
+/**
+ * A 32-bits hash.
+ * <p>
+ * Instances of this class are thread-safe.
+ */
+public abstract class XXHash32 {
 
-  int v1, v2, v3, v4, memSize;
-  long totalLen;
-  final byte[] memory;
-
-  AbstractStreamingXXHash32Java(int seed) {
-    super(seed);
-    memory = new byte[16];
-    reset();
-  }
+  /**
+   * Compute the 32-bits hash of <code>buf[off:off+len]</code> using seed
+   * <code>seed</code>.
+   */
+  public abstract int hash(byte[] buf, int off, int len, int seed);
 
   @Override
-  public void reset() {
-    v1 = seed + XXHashConstants.PRIME1 + XXHashConstants.PRIME2;
-    v2 = seed + XXHashConstants.PRIME2;
-    v3 = seed + 0;
-    v4 = seed - XXHashConstants.PRIME1;
-    totalLen = 0;
-    memSize = 0;
+  public String toString() {
+    return getClass().getSimpleName();
   }
 
 }

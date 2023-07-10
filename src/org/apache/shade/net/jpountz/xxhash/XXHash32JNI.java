@@ -1,4 +1,4 @@
-package org.apache.shade.jpountz.lz4;
+package org.apache.shade.net.jpountz.xxhash;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,23 +14,16 @@ package org.apache.shade.jpountz.lz4;
  * limitations under the License.
  */
 
-/**
- * LZ4 compression or decompression error.
- */
-public class LZ4Exception extends RuntimeException {
+import static org.apache.shade.net.jpountz.util.Utils.checkRange;
 
-  private static final long serialVersionUID = 1L;
+final class XXHash32JNI extends XXHash32 {
 
-  public LZ4Exception(String msg, Throwable t) {
-    super(msg, t);
-  }
+  public static final XXHash32 INSTANCE = new XXHash32JNI();
 
-  public LZ4Exception(String msg) {
-    super(msg);
-  }
-
-  public LZ4Exception() {
-    super();
+  @Override
+  public int hash(byte[] buf, int off, int len, int seed) {
+    checkRange(buf, off, len);
+    return org.apache.shade.net.jpountz.xxhash.XXHashJNI.XXH32(buf, off, len, seed);
   }
 
 }

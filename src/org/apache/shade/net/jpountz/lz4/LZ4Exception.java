@@ -1,4 +1,4 @@
-package org.apache.shade.jpountz.lz4;
+package org.apache.shade.net.jpountz.lz4;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,13 +15,22 @@ package org.apache.shade.jpountz.lz4;
  */
 
 /**
- * @deprecated Use {@link LZ4SafeDecompressor} instead.
+ * LZ4 compression or decompression error.
  */
-@Deprecated
-public interface LZ4UnknownSizeDecompressor {
+public class LZ4Exception extends RuntimeException {
 
-  int decompress(byte[] src, int srcOff, int srcLen, byte[] dest, int destOff, int maxDestLen);
+  private static final long serialVersionUID = 1L;
 
-  int decompress(byte[] src, int srcOff, int srcLen, byte[] dest, int destOff);
+  public LZ4Exception(String msg, Throwable t) {
+    super(msg, t);
+  }
+
+  public LZ4Exception(String msg) {
+    super(msg);
+  }
+
+  public LZ4Exception() {
+    super();
+  }
 
 }
