@@ -111,7 +111,7 @@ public class SharePlexJsonSerDerTest {
             deserializationSchema.deserialize(line.getBytes(StandardCharsets.UTF_8), collector);
         }
 
-        // Maxwell captures change data (`maxwell-data.txt`) on the `product` table:
+        // shareplex captures change data (`shareplex-data.txt`) on the `product` table:
         //
         // CREATE TABLE product (
         //  id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,

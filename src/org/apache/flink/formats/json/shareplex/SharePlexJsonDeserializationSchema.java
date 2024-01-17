@@ -45,15 +45,15 @@ import java.util.stream.Collectors;
 import static java.lang.String.format;
 
 /**
- * Deserialization schema from Maxwell JSON to Flink Table/SQL internal data structure {@link
- * RowData}. The deserialization schema knows Maxwell's schema definition and can extract the
+ * Deserialization schema from shareplex JSON to Flink Table/SQL internal data structure {@link
+ * RowData}. The deserialization schema knows shareplex's schema definition and can extract the
  * database data and convert into {@link RowData} with {@link RowKind}.
  *
  * <p>Deserializes a <code>byte[]</code> message as a JSON object and reads the specified fields.
  *
  * <p>Failures during deserialization are forwarded as wrapped IOExceptions.
  *
- * @see <a href="http://maxwells-daemon.io/">Maxwell</a>
+ * @see <a href="http://shareplexs-daemon.io/">shareplex</a>
  */
 public class SharePlexJsonDeserializationSchema implements DeserializationSchema<RowData> {
     private static final long serialVersionUID = 2L;
@@ -64,7 +64,7 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
     private static final String OP_DELETE = "delete";
 
     /**
-     * The deserializer to deserialize Maxwell JSON data.
+     * The deserializer to deserialize shareplex JSON data.
      */
     private final JsonRowDataDeserializationSchema jsonDeserializer;
 
@@ -142,7 +142,7 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
         }
 
         try {
-            // share-plex --> maxwell
+            // share-plex --> shareplex
             final JsonNode root = jsonDeserializer.deserializeToJsonNode(message);
             final GenericRowData row = (GenericRowData) jsonDeserializer.convertToRowData(root);
             String type = row.getString(2).toString(); // "type" field
@@ -179,7 +179,7 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
                 if (!ignoreParseErrors) {
                     throw new IOException(
                             format(
-                                    "Unknown \"type\" value \"%s\". The Maxwell JSON message is '%s'",
+                                    "Unknown \"type\" value \"%s\". The shareplex JSON message is '%s'",
                                     type, new String(message)));
                 }
             }
@@ -187,7 +187,7 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
             // a big try catch to protect the processing.
             if (!ignoreParseErrors) {
                 throw new IOException(
-                        format("Corrupt Maxwell JSON message '%s'.", new String(message)), t);
+                        format("Corrupt shareplex JSON message '%s'.", new String(message)), t);
             }
         }
     }

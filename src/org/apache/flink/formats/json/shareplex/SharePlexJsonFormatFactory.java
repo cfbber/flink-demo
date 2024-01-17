@@ -47,7 +47,7 @@ import static org.apache.flink.formats.json.JsonFormatOptions.ENCODE_DECIMAL_AS_
 import static org.apache.flink.formats.json.shareplex.SharePlexJsonFormatOptions.*;
 
 /**
- * Format factory for providing configured instances of Maxwell JSON to RowData {@link
+ * Format factory for providing configured instances of shareplex JSON to RowData {@link
  * DeserializationSchema}.
  */
 @Internal
@@ -130,12 +130,12 @@ public class SharePlexJsonFormatFactory
         return options;
     }
 
-    /** Validator for maxwell decoding format. */
+    /** Validator for shareplex decoding format. */
     private static void validateDecodingFormatOptions(ReadableConfig tableOptions) {
         JsonFormatOptionsUtil.validateDecodingFormatOptions(tableOptions);
     }
 
-    /** Validator for maxwell encoding format. */
+    /** Validator for shareplex encoding format. */
     private static void validateEncodingFormatOptions(ReadableConfig tableOptions) {
         JsonFormatOptionsUtil.validateEncodingFormatOptions(tableOptions);
     }

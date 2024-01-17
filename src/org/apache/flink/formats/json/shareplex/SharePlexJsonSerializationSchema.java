@@ -36,7 +36,7 @@ import static org.apache.flink.table.types.utils.TypeConversions.fromLogicalToDa
 
 /**
  * Serialization schema from Flink Table/SQL internal data structure {@link RowData} to
- * maxwell-Json.
+ * shareplex-Json.
  */
 public class SharePlexJsonSerializationSchema implements SerializationSchema<RowData> {
     private static final long serialVersionUID = 1L;

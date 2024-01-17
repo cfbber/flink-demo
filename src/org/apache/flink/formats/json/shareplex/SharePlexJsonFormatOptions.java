@@ -22,7 +22,7 @@ import org.apache.flink.annotation.PublicEvolving;
 import org.apache.flink.configuration.ConfigOption;
 import org.apache.flink.formats.json.JsonFormatOptions;
 
-/** Option utils for maxwell-json format. */
+/** Option utils for shareplex-json format. */
 @PublicEvolving
 public class SharePlexJsonFormatOptions {
 

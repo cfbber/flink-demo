@@ -40,7 +40,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/** {@link DecodingFormat} for Maxwell using JSON encoding. */
+/** {@link DecodingFormat} for shareplex using JSON encoding. */
 public class SharePlexJsonDecodingFormat implements DecodingFormat<DeserializationSchema<RowData>> {
 
     // --------------------------------------------------------------------------------------------
@@ -173,7 +173,7 @@ public class SharePlexJsonDecodingFormat implements DecodingFormat<Deserializati
                         if (row.isNullAt(pos)) {
                             return null;
                         }
-                        // the `ts` field of Maxwell JSON is assigned with `timestampSeconds`.
+                        // the `ts` field of shareplex JSON is assigned with `timestampSeconds`.
                         return TimestampData.fromEpochMillis(row.getLong(pos) * 1000);
                     }
                 });
