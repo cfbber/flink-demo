@@ -20,7 +20,7 @@ package org.apache.flink.formats.json.shareplex;
 
 import org.apache.flink.formats.common.TimestampFormat;
 import org.apache.flink.formats.json.JsonFormatOptions;
-import org.apache.flink.formats.json.shareplex.MaxwellJsonDecodingFormat.ReadableMetadata;
+import org.apache.flink.formats.json.shareplex.SharePlexJsonDecodingFormat.ReadableMetadata;
 import org.apache.flink.table.api.DataTypes;
 import org.apache.flink.table.data.RowData;
 import org.apache.flink.table.runtime.typeutils.InternalTypeInfo;
@@ -49,9 +49,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Tests for {@link MaxwellJsonSerializationSchema} and {@link MaxwellJsonDeserializationSchema}.
+ * Tests for {@link SharePlexJsonSerializationSchema} and {@link SharePlexJsonDeserializationSchema}.
  */
-public class MaxwellJsonSerDerTest {
+public class SharePlexJsonSerDerTest {
 
     private static final DataType PHYSICAL_DATA_TYPE =
             ROW(
@@ -71,8 +71,8 @@ public class MaxwellJsonSerDerTest {
                         requestedMetadata.stream()
                                 .map(m -> DataTypes.FIELD(m.key, m.dataType))
                                 .collect(Collectors.toList()));
-        final MaxwellJsonDeserializationSchema deserializationSchema =
-                new MaxwellJsonDeserializationSchema(
+        final SharePlexJsonDeserializationSchema deserializationSchema =
+                new SharePlexJsonDeserializationSchema(
                         PHYSICAL_DATA_TYPE,
                         requestedMetadata,
                         InternalTypeInfo.of(producedDataType.getLogicalType()),
@@ -98,8 +98,8 @@ public class MaxwellJsonSerDerTest {
     @Test
     public void testSerializationDeserialization() throws Exception {
         List<String> lines = readLines("shareplex-data.txt");
-        MaxwellJsonDeserializationSchema deserializationSchema =
-                new MaxwellJsonDeserializationSchema(
+        SharePlexJsonDeserializationSchema deserializationSchema =
+                new SharePlexJsonDeserializationSchema(
                         PHYSICAL_DATA_TYPE,
                         Collections.emptyList(),
                         InternalTypeInfo.of(PHYSICAL_DATA_TYPE.getLogicalType()),
@@ -174,8 +174,8 @@ public class MaxwellJsonSerDerTest {
                 collector.list.stream().map(Object::toString).collect(Collectors.toList());
         assertEquals(expected, actual);
 
-        MaxwellJsonSerializationSchema serializationSchema =
-                new MaxwellJsonSerializationSchema(
+        SharePlexJsonSerializationSchema serializationSchema =
+                new SharePlexJsonSerializationSchema(
                         (RowType) PHYSICAL_DATA_TYPE.getLogicalType(),
                         TimestampFormat.SQL,
                         JsonFormatOptions.MapNullKeyMode.LITERAL,
@@ -222,7 +222,7 @@ public class MaxwellJsonSerDerTest {
     // --------------------------------------------------------------------------------------------
 
     private static List<String> readLines(String resource) throws IOException {
-        final URL url = MaxwellJsonSerDerTest.class.getClassLoader().getResource(resource);
+        final URL url = SharePlexJsonSerDerTest.class.getClassLoader().getResource(resource);
         assert url != null;
         Path path = new File(url.getFile()).toPath();
         return Files.readAllLines(path);

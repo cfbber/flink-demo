@@ -21,7 +21,7 @@ package org.apache.flink.formats.json.shareplex;
 import org.apache.flink.api.common.serialization.DeserializationSchema;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.formats.common.TimestampFormat;
-import org.apache.flink.formats.json.shareplex.MaxwellJsonDeserializationSchema.MetadataConverter;
+import org.apache.flink.formats.json.shareplex.SharePlexJsonDeserializationSchema.MetadataConverter;
 import org.apache.flink.table.api.DataTypes;
 import org.apache.flink.table.connector.ChangelogMode;
 import org.apache.flink.table.connector.format.DecodingFormat;
@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /** {@link DecodingFormat} for Maxwell using JSON encoding. */
-public class MaxwellJsonDecodingFormat implements DecodingFormat<DeserializationSchema<RowData>> {
+public class SharePlexJsonDecodingFormat implements DecodingFormat<DeserializationSchema<RowData>> {
 
     // --------------------------------------------------------------------------------------------
     // Mutable attributes
@@ -54,7 +54,7 @@ public class MaxwellJsonDecodingFormat implements DecodingFormat<Deserialization
 
     private final TimestampFormat timestampFormat;
 
-    public MaxwellJsonDecodingFormat(boolean ignoreParseErrors, TimestampFormat timestampFormat) {
+    public SharePlexJsonDecodingFormat(boolean ignoreParseErrors, TimestampFormat timestampFormat) {
         this.ignoreParseErrors = ignoreParseErrors;
         this.timestampFormat = timestampFormat;
         this.metadataKeys = Collections.emptyList();
@@ -85,7 +85,7 @@ public class MaxwellJsonDecodingFormat implements DecodingFormat<Deserialization
                 DataTypeUtils.appendRowFields(physicalDataType, metadataFields);
         final TypeInformation<RowData> producedTypeInfo =
                 context.createTypeInformation(producedDataType);
-        return new MaxwellJsonDeserializationSchema(
+        return new SharePlexJsonDeserializationSchema(
                 physicalDataType,
                 readableMetadata,
                 producedTypeInfo,

@@ -38,7 +38,7 @@ import static org.apache.flink.table.types.utils.TypeConversions.fromLogicalToDa
  * Serialization schema from Flink Table/SQL internal data structure {@link RowData} to
  * maxwell-Json.
  */
-public class MaxwellJsonSerializationSchema implements SerializationSchema<RowData> {
+public class SharePlexJsonSerializationSchema implements SerializationSchema<RowData> {
     private static final long serialVersionUID = 1L;
 
     private static final StringData OP_INSERT = StringData.fromString("insert");
@@ -51,7 +51,7 @@ public class MaxwellJsonSerializationSchema implements SerializationSchema<RowDa
 
     private transient GenericRowData reuse;
 
-    public MaxwellJsonSerializationSchema(
+    public SharePlexJsonSerializationSchema(
             RowType rowType,
             TimestampFormat timestampFormat,
             JsonFormatOptions.MapNullKeyMode mapNullKeyMode,
@@ -101,7 +101,7 @@ public class MaxwellJsonSerializationSchema implements SerializationSchema<RowDa
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        MaxwellJsonSerializationSchema that = (MaxwellJsonSerializationSchema) o;
+        SharePlexJsonSerializationSchema that = (SharePlexJsonSerializationSchema) o;
         return Objects.equals(jsonSerializer, that.jsonSerializer)
                 && timestampFormat == that.timestampFormat;
     }

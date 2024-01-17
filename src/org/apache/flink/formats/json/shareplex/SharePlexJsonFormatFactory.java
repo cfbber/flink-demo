@@ -44,14 +44,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.apache.flink.formats.json.JsonFormatOptions.ENCODE_DECIMAL_AS_PLAIN_NUMBER;
-import static org.apache.flink.formats.json.shareplex.MaxwellJsonFormatOptions.*;
+import static org.apache.flink.formats.json.shareplex.SharePlexJsonFormatOptions.*;
 
 /**
  * Format factory for providing configured instances of Maxwell JSON to RowData {@link
  * DeserializationSchema}.
  */
 @Internal
-public class MaxwellJsonFormatFactory
+public class SharePlexJsonFormatFactory
         implements DeserializationFormatFactory, SerializationFormatFactory {
 
     public static final String IDENTIFIER = "shareplex-json";
@@ -66,7 +66,7 @@ public class MaxwellJsonFormatFactory
         final TimestampFormat timestampFormat =
                 JsonFormatOptionsUtil.getTimestampFormat(formatOptions);
 
-        return new MaxwellJsonDecodingFormat(ignoreParseErrors, timestampFormat);
+        return new SharePlexJsonDecodingFormat(ignoreParseErrors, timestampFormat);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class MaxwellJsonFormatFactory
             public SerializationSchema<RowData> createRuntimeEncoder(
                     DynamicTableSink.Context context, DataType consumedDataType) {
                 final RowType rowType = (RowType) consumedDataType.getLogicalType();
-                return new MaxwellJsonSerializationSchema(
+                return new SharePlexJsonSerializationSchema(
                         rowType,
                         timestampFormat,
                         mapNullKeyMode,

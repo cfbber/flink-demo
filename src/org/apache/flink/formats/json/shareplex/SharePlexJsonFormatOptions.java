@@ -24,7 +24,7 @@ import org.apache.flink.formats.json.JsonFormatOptions;
 
 /** Option utils for maxwell-json format. */
 @PublicEvolving
-public class MaxwellJsonFormatOptions {
+public class SharePlexJsonFormatOptions {
 
     public static final ConfigOption<Boolean> IGNORE_PARSE_ERRORS =
             JsonFormatOptions.IGNORE_PARSE_ERRORS;
@@ -37,5 +37,5 @@ public class MaxwellJsonFormatOptions {
     public static final ConfigOption<String> JSON_MAP_NULL_KEY_LITERAL =
             JsonFormatOptions.MAP_NULL_KEY_LITERAL;
 
-    private MaxwellJsonFormatOptions() {}
+    private SharePlexJsonFormatOptions() {}
 }

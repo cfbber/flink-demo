@@ -22,7 +22,7 @@ import org.apache.flink.api.common.serialization.DeserializationSchema;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.formats.common.TimestampFormat;
 import org.apache.flink.formats.json.JsonRowDataDeserializationSchema;
-import org.apache.flink.formats.json.shareplex.MaxwellJsonDecodingFormat.ReadableMetadata;
+import org.apache.flink.formats.json.shareplex.SharePlexJsonDecodingFormat.ReadableMetadata;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonNode;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.ObjectNode;
@@ -55,7 +55,7 @@ import static java.lang.String.format;
  *
  * @see <a href="http://maxwells-daemon.io/">Maxwell</a>
  */
-public class MaxwellJsonDeserializationSchema implements DeserializationSchema<RowData> {
+public class SharePlexJsonDeserializationSchema implements DeserializationSchema<RowData> {
     private static final long serialVersionUID = 2L;
 
     private static final String FIELD_OLD = "old";
@@ -98,9 +98,9 @@ public class MaxwellJsonDeserializationSchema implements DeserializationSchema<R
      */
     private final int fieldCount;
 
-    public MaxwellJsonDeserializationSchema(
+    public SharePlexJsonDeserializationSchema(
             DataType physicalDataType,
-            List<MaxwellJsonDecodingFormat.ReadableMetadata> requestedMetadata,
+            List<SharePlexJsonDecodingFormat.ReadableMetadata> requestedMetadata,
             TypeInformation<RowData> producedTypeInfo,
             boolean ignoreParseErrors,
             TimestampFormat timestampFormat) {
@@ -277,7 +277,7 @@ public class MaxwellJsonDeserializationSchema implements DeserializationSchema<R
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        MaxwellJsonDeserializationSchema that = (MaxwellJsonDeserializationSchema) o;
+        SharePlexJsonDeserializationSchema that = (SharePlexJsonDeserializationSchema) o;
         return Objects.equals(jsonDeserializer, that.jsonDeserializer)
                 && hasMetadata == that.hasMetadata
                 && Objects.equals(producedTypeInfo, that.producedTypeInfo)

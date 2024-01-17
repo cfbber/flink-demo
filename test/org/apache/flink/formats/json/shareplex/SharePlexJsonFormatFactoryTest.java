@@ -44,8 +44,8 @@ import static org.apache.flink.core.testutils.FlinkMatchers.containsCause;
 import static org.apache.flink.table.factories.utils.FactoryMocks.*;
 import static org.junit.Assert.assertEquals;
 
-/** Tests for {@link MaxwellJsonFormatFactory}. */
-public class MaxwellJsonFormatFactoryTest extends TestLogger {
+/** Tests for {@link SharePlexJsonFormatFactory}. */
+public class SharePlexJsonFormatFactoryTest extends TestLogger {
     @Rule public ExpectedException thrown = ExpectedException.none();
 
     private static final InternalTypeInfo<RowData> ROW_TYPE_INFO =
@@ -53,16 +53,16 @@ public class MaxwellJsonFormatFactoryTest extends TestLogger {
 
     @Test
     public void testSeDeSchema() {
-        final MaxwellJsonDeserializationSchema expectedDeser =
-                new MaxwellJsonDeserializationSchema(
+        final SharePlexJsonDeserializationSchema expectedDeser =
+                new SharePlexJsonDeserializationSchema(
                         PHYSICAL_DATA_TYPE,
                         Collections.emptyList(),
                         ROW_TYPE_INFO,
                         true,
                         TimestampFormat.ISO_8601);
 
-        final MaxwellJsonSerializationSchema expectedSer =
-                new MaxwellJsonSerializationSchema(
+        final SharePlexJsonSerializationSchema expectedSer =
+                new SharePlexJsonSerializationSchema(
                         PHYSICAL_TYPE,
                         TimestampFormat.ISO_8601,
                         JsonFormatOptions.MapNullKeyMode.LITERAL,
