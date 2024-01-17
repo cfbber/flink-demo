@@ -16,11 +16,11 @@
  * limitations under the License.
  */
 
-package org.apache.flink.formats.json.maxwell;
+package org.apache.flink.formats.json.shareplex;
 
 import org.apache.flink.formats.common.TimestampFormat;
 import org.apache.flink.formats.json.JsonFormatOptions;
-import org.apache.flink.formats.json.maxwell.MaxwellJsonDecodingFormat.ReadableMetadata;
+import org.apache.flink.formats.json.shareplex.MaxwellJsonDecodingFormat.ReadableMetadata;
 import org.apache.flink.table.api.DataTypes;
 import org.apache.flink.table.data.RowData;
 import org.apache.flink.table.runtime.typeutils.InternalTypeInfo;

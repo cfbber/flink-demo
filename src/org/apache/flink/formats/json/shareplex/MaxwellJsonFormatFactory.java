@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package org.apache.flink.formats.json.maxwell;
+package org.apache.flink.formats.json.shareplex;
 
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.api.common.serialization.DeserializationSchema;
@@ -44,7 +44,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.apache.flink.formats.json.JsonFormatOptions.ENCODE_DECIMAL_AS_PLAIN_NUMBER;
-import static org.apache.flink.formats.json.maxwell.MaxwellJsonFormatOptions.*;
+import static org.apache.flink.formats.json.shareplex.MaxwellJsonFormatOptions.*;
 
 /**
  * Format factory for providing configured instances of Maxwell JSON to RowData {@link
@@ -54,7 +54,7 @@ import static org.apache.flink.formats.json.maxwell.MaxwellJsonFormatOptions.*;
 public class MaxwellJsonFormatFactory
         implements DeserializationFormatFactory, SerializationFormatFactory {
 
-    public static final String IDENTIFIER = "maxwell-json";
+    public static final String IDENTIFIER = "shareplex-json";
 
     @Override
     public DecodingFormat<DeserializationSchema<RowData>> createDecodingFormat(

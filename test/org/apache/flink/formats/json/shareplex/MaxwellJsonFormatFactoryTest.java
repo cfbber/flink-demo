@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package org.apache.flink.formats.json.maxwell;
+package org.apache.flink.formats.json.shareplex;
 
 import org.apache.flink.api.common.serialization.DeserializationSchema;
 import org.apache.flink.api.common.serialization.SerializationSchema;
@@ -102,7 +102,7 @@ public class MaxwellJsonFormatFactoryTest extends TestLogger {
                                 "Unrecognized option for boolean: abc. Expected either true or false(case insensitive)")));
 
         final Map<String, String> options =
-                getModifiedOptions(opts -> opts.put("maxwell-json.ignore-parse-errors", "abc"));
+                getModifiedOptions(opts -> opts.put("shareplex-json.ignore-parse-errors", "abc"));
 
         createTableSource(SCHEMA, options);
     }
@@ -111,7 +111,7 @@ public class MaxwellJsonFormatFactoryTest extends TestLogger {
     public void testInvalidOptionForTimestampFormat() {
         final Map<String, String> tableOptions =
                 getModifiedOptions(
-                        opts -> opts.put("maxwell-json.timestamp-format.standard", "test"));
+                        opts -> opts.put("shareplex-json.timestamp-format.standard", "test"));
 
         thrown.expect(ValidationException.class);
         thrown.expect(
@@ -124,7 +124,7 @@ public class MaxwellJsonFormatFactoryTest extends TestLogger {
     @Test
     public void testInvalidOptionForMapNullKeyMode() {
         final Map<String, String> tableOptions =
-                getModifiedOptions(opts -> opts.put("maxwell-json.map-null-key.mode", "invalid"));
+                getModifiedOptions(opts -> opts.put("shareplex-json.map-null-key.mode", "invalid"));
 
         thrown.expect(ValidationException.class);
         thrown.expect(
@@ -155,12 +155,12 @@ public class MaxwellJsonFormatFactoryTest extends TestLogger {
         options.put("target", "MyTarget");
         options.put("buffer-size", "1000");
 
-        options.put("format", "maxwell-json");
-        options.put("maxwell-json.ignore-parse-errors", "true");
-        options.put("maxwell-json.timestamp-format.standard", "ISO-8601");
-        options.put("maxwell-json.map-null-key.mode", "LITERAL");
-        options.put("maxwell-json.map-null-key.literal", "null");
-        options.put("maxwell-json.encode.decimal-as-plain-number", "true");
+        options.put("format", "shareplex-json");
+        options.put("shareplex-json.ignore-parse-errors", "true");
+        options.put("shareplex-json.timestamp-format.standard", "ISO-8601");
+        options.put("shareplex-json.map-null-key.mode", "LITERAL");
+        options.put("shareplex-json.map-null-key.literal", "null");
+        options.put("shareplex-json.encode.decimal-as-plain-number", "true");
         return options;
     }
 }

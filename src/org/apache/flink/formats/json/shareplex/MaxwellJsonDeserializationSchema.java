@@ -16,13 +16,13 @@
  * limitations under the License.
  */
 
-package org.apache.flink.formats.json.maxwell;
+package org.apache.flink.formats.json.shareplex;
 
 import org.apache.flink.api.common.serialization.DeserializationSchema;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.formats.common.TimestampFormat;
 import org.apache.flink.formats.json.JsonRowDataDeserializationSchema;
-import org.apache.flink.formats.json.maxwell.MaxwellJsonDecodingFormat.ReadableMetadata;
+import org.apache.flink.formats.json.shareplex.MaxwellJsonDecodingFormat.ReadableMetadata;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonNode;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.ObjectNode;
@@ -100,7 +100,7 @@ public class MaxwellJsonDeserializationSchema implements DeserializationSchema<R
 
     public MaxwellJsonDeserializationSchema(
             DataType physicalDataType,
-            List<ReadableMetadata> requestedMetadata,
+            List<MaxwellJsonDecodingFormat.ReadableMetadata> requestedMetadata,
             TypeInformation<RowData> producedTypeInfo,
             boolean ignoreParseErrors,
             TimestampFormat timestampFormat) {
