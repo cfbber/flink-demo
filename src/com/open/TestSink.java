@@ -1,4 +1,4 @@
-package com.clic;
+package com.open;
 
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.slf4j.Logger;

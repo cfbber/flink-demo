@@ -11,14 +11,8 @@
     <property name="compile.debug" value="true"/>
     <property name="compile.deprecation" value="false"/>
     <property name="compile.optimize" value="false"/>
-    <property name="main.class" value="com.clic.Kkk2"/>
+    <property name="main.class" value="com.open.Kkk2"/>
     <property name="jar.name" value="${ant.project.name}"/>
-
-    <!--只需要把 insured，single 打成jar包-->
-    <property name="jar.include" value="com/chinalife/bdmp/single/**/*.class,com/chinalife/bdmp/insured/**/*.class"/>
-
-    <!--需要编译的java文件路径-->
-    <property name="jar.dir" value="com\chinalife\bdmp"/>
 
     <property name="dist.dir" value="${base.dir}/ant"/>
 
