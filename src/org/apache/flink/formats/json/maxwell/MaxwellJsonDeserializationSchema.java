@@ -24,6 +24,8 @@ import org.apache.flink.formats.common.TimestampFormat;
 import org.apache.flink.formats.json.JsonRowDataDeserializationSchema;
 import org.apache.flink.formats.json.maxwell.MaxwellJsonDecodingFormat.ReadableMetadata;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonNode;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.flink.table.api.DataTypes;
 import org.apache.flink.table.data.GenericRowData;
 import org.apache.flink.table.data.RowData;
@@ -35,6 +37,7 @@ import org.apache.flink.util.Collector;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -60,25 +63,39 @@ public class MaxwellJsonDeserializationSchema implements DeserializationSchema<R
     private static final String OP_UPDATE = "update";
     private static final String OP_DELETE = "delete";
 
-    /** The deserializer to deserialize Maxwell JSON data. */
+    /**
+     * The deserializer to deserialize Maxwell JSON data.
+     */
     private final JsonRowDataDeserializationSchema jsonDeserializer;
 
-    /** Flag that indicates that an additional projection is required for metadata. */
+    /**
+     * Flag that indicates that an additional projection is required for metadata.
+     */
     private final boolean hasMetadata;
 
-    /** Metadata to be extracted for every record. */
+    /**
+     * Metadata to be extracted for every record.
+     */
     private final MetadataConverter[] metadataConverters;
 
-    /** {@link TypeInformation} of the produced {@link RowData} (physical + meta data). */
+    /**
+     * {@link TypeInformation} of the produced {@link RowData} (physical + meta data).
+     */
     private final TypeInformation<RowData> producedTypeInfo;
 
-    /** Flag indicating whether to ignore invalid fields/rows (default: throw an exception). */
+    /**
+     * Flag indicating whether to ignore invalid fields/rows (default: throw an exception).
+     */
     private final boolean ignoreParseErrors;
 
-    /** Names of physical fields. */
+    /**
+     * Names of physical fields.
+     */
     private final List<String> fieldNames;
 
-    /** Number of physical fields. */
+    /**
+     * Number of physical fields.
+     */
     private final int fieldCount;
 
     public MaxwellJsonDeserializationSchema(
@@ -119,7 +136,13 @@ public class MaxwellJsonDeserializationSchema implements DeserializationSchema<R
         if (message == null || message.length == 0) {
             return;
         }
+        message = convertMax(message);
+        if (message == null || message.length == 0) {
+            return;
+        }
+
         try {
+            // share-plex --> maxwell
             final JsonNode root = jsonDeserializer.deserializeToJsonNode(message);
             final GenericRowData row = (GenericRowData) jsonDeserializer.convertToRowData(root);
             String type = row.getString(2).toString(); // "type" field
@@ -167,6 +190,53 @@ public class MaxwellJsonDeserializationSchema implements DeserializationSchema<R
                         format("Corrupt Maxwell JSON message '%s'.", new String(message)), t);
             }
         }
+    }
+
+    private static byte[] convertMax(byte[] origin) {
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // {"database":"test","table":"product","type":"insert","ts":1596684883,"xid":7125,"xoffset":0
+        JsonNode jsonNode = null;
+        try {
+            jsonNode = mapper.readTree(origin);
+
+            JsonNode meta = jsonNode.get("meta");
+
+            JsonNode op = meta.get("op");
+            String type = "";
+
+            switch (op.asText()) {
+                case "ins":
+                    type = "insert";
+                    break;
+                case "del":
+                    type = "delete";
+                    break;
+                case "upd":
+                    type = "update";
+                    break;
+                default:
+                    type = "";
+            }
+
+            ((ObjectNode) jsonNode).put("type", type);
+            ((ObjectNode) jsonNode).remove("meta");
+
+            if (type.equals("update")) {
+                JsonNode old = jsonNode.get("key");
+                ((ObjectNode) jsonNode).put("old", old);
+                ((ObjectNode) jsonNode).remove("key");
+
+            }
+
+            String data = objectMapper.writeValueAsString(jsonNode);
+            return data.getBytes(StandardCharsets.UTF_8);
+
+        } catch (IOException e) {
+            return null;
+        }
+
     }
 
     private void emitRow(
