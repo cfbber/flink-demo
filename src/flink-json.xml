@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--project name,default 可选compile|run|package -->
+<project name="flink-json-a" default="package">
+
+    <property file="build.properties"/>
+
+    <property name="build.classes" value="./build/classes"/>
+    <property name="linux.dir" value="~/test/"/>
+
+    <property name="javac.target" value="1.8"/>
+    <property name="compile.debug" value="true"/>
+    <property name="compile.deprecation" value="false"/>
+    <property name="compile.optimize" value="false"/>
+    <property name="jar.name" value="${ant.project.name}"/>
+
+    <!--需要编译的java文件路径-->
+
+    <property name="dist.dir" value="${base.dir}/ant"/>
+
+    <path id="compile.classpath">
+        <fileset dir="${base.dir}\lib" includes="*.jar"/>
+
+    </path>
+
+    <target name="clean" description="清理,删除临时目录">
+        <delete dir="${dist.dir}"/>
+        <echo message="清理完毕"/>
+    </target>
+
+    <!-- 初始化,建立目录,复制文件 -->
+    <target name="mkDir" depends="clean" description="初始化,建立目录">
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${dist.dir}/class"/>
+        <mkdir dir="${dist.dir}/src"/>
+    </target>
+
+    <!--拷贝${jar.name}的源文件-->
+    <target name="copy" depends="mkDir" description="复制文件">
+        <echo message="拷贝${ant.project.name}的源文件..."/>
+        <copy todir="${dist.dir}/src">
+            <fileset dir="${src.dir}" includes="org/apache/flink/formats/**/*.java"/>
+        </copy>
+    </target>
+
+    <!--logging="info" -->
+    <target name="compile" description="build" depends="copy">
+
+        <javac srcdir="${dist.dir}/src" destdir="${dist.dir}/class" memoryinitialsize="1g" target="${javac.target}"
+               source="${javac.target}"
+               memorymaximumsize="2g" nowarn="true" debug="${compile.debug}" deprecation="${compile.deprecation}"
+               optimize="${compile.optimize}" fork="true" encoding="UTF-8" includeantruntime="false">
+            <classpath refid="compile.classpath"/>
+        </javac>
+    </target>
+
+    <target name="package" depends="compile" description="打包类文件">
+        <echo message="打包${jar.name}..."/>
+        <jar destfile="${base.dir}/ant/${jar.name}.jar">
+            <fileset dir="${dist.dir}/class" includes="**/*.class"/>
+            <manifest>
+<!--                <attribute name="Main-class" value="${main.class}"/>-->
+            </manifest>
+        </jar>
+        <delete dir="${dist.dir}/src"/>
+        <echo message="打包${jar.name}完成"/>
+    </target>
+    <target name="ssh" depends="package" description="通过scp上传jar包">
+        <scp file="${dist.dir}/${jar.name}.jar" todir="${linux.username}@${linux.host}:${linux.dir}"
+             password="${linux.password}" trust="true"/>
+        <echo message="jar包上传成功"/>
+    </target>
+</project>
