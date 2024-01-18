@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Main-Class: com.clic.Kkk2
+Main-Class: com.open.Kkk2
 Class-Path: log4j-1.2.15.jar flink-csv-1.14.6.jar slf4j-api-1.7.29.jar f
  link-json-1.14.6.jar slf4j-log4j12-1.7.15.jar flink-cep_2.11-1.14.6.jar
   kafka-clients-0.9.0.1.jar flink-dist_2.11-1.14.6.jar flink-gelly_2.11-
