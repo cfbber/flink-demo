@@ -59,7 +59,7 @@ public class SharePlexJsonFormatFactoryTest extends TestLogger {
                         Collections.emptyList(),
                         ROW_TYPE_INFO,
                         true,
-                        TimestampFormat.ISO_8601);
+                        TimestampFormat.ISO_8601, "defaultTable");
 
         final SharePlexJsonSerializationSchema expectedSer =
                 new SharePlexJsonSerializationSchema(
@@ -152,7 +152,7 @@ public class SharePlexJsonFormatFactoryTest extends TestLogger {
     private Map<String, String> getAllOptions() {
         final Map<String, String> options = new HashMap<>();
         options.put("connector", TestDynamicTableFactory.IDENTIFIER);
-        options.put("target", "MyTarget");
+        options.put("target", "productx");
         options.put("buffer-size", "1000");
 
         options.put("format", "shareplex-json");
@@ -161,6 +161,7 @@ public class SharePlexJsonFormatFactoryTest extends TestLogger {
         options.put("shareplex-json.map-null-key.mode", "LITERAL");
         options.put("shareplex-json.map-null-key.literal", "null");
         options.put("shareplex-json.encode.decimal-as-plain-number", "true");
+        options.put("property-version", "product");
         return options;
     }
 }

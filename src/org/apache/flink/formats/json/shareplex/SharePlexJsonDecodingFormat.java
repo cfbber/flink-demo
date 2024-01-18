@@ -32,6 +32,8 @@ import org.apache.flink.table.data.TimestampData;
 import org.apache.flink.table.types.DataType;
 import org.apache.flink.table.types.utils.DataTypeUtils;
 import org.apache.flink.types.RowKind;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -40,23 +42,31 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/** {@link DecodingFormat} for shareplex using JSON encoding. */
+/**
+ * {@link DecodingFormat} for shareplex using JSON encoding.
+ */
 public class SharePlexJsonDecodingFormat implements DecodingFormat<DeserializationSchema<RowData>> {
+    private static Logger LOG = LoggerFactory.getLogger(SharePlexJsonDecodingFormat.class);
 
     // --------------------------------------------------------------------------------------------
     // Mutable attributes
     // --------------------------------------------------------------------------------------------
 
-    /** The requested metadata keys. */
+    /**
+     * The requested metadata keys.
+     */
     private List<String> metadataKeys;
 
     private final boolean ignoreParseErrors;
 
     private final TimestampFormat timestampFormat;
 
-    public SharePlexJsonDecodingFormat(boolean ignoreParseErrors, TimestampFormat timestampFormat) {
+    private final String defaultTable ;
+
+    public SharePlexJsonDecodingFormat(boolean ignoreParseErrors, TimestampFormat timestampFormat, String defaultTable) {
         this.ignoreParseErrors = ignoreParseErrors;
         this.timestampFormat = timestampFormat;
+        this.defaultTable = defaultTable;
         this.metadataKeys = Collections.emptyList();
     }
 
@@ -85,12 +95,15 @@ public class SharePlexJsonDecodingFormat implements DecodingFormat<Deserializati
                 DataTypeUtils.appendRowFields(physicalDataType, metadataFields);
         final TypeInformation<RowData> producedTypeInfo =
                 context.createTypeInformation(producedDataType);
+        LOG.info("context--------" + context);
+        LOG.info("context...." + context.getClass());
+//        context.
         return new SharePlexJsonDeserializationSchema(
                 physicalDataType,
                 readableMetadata,
                 producedTypeInfo,
                 ignoreParseErrors,
-                timestampFormat);
+                timestampFormat,defaultTable);
     }
 
     @Override
@@ -120,7 +133,9 @@ public class SharePlexJsonDecodingFormat implements DecodingFormat<Deserializati
     // Metadata handling
     // --------------------------------------------------------------------------------------------
 
-    /** List of metadata that can be read with this format. */
+    /**
+     * List of metadata that can be read with this format.
+     */
     enum ReadableMetadata {
         DATABASE(
                 "database",

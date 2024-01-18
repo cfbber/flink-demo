@@ -38,6 +38,8 @@ import org.apache.flink.table.factories.SerializationFormatFactory;
 import org.apache.flink.table.types.DataType;
 import org.apache.flink.table.types.logical.RowType;
 import org.apache.flink.types.RowKind;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -55,6 +57,7 @@ public class SharePlexJsonFormatFactory
         implements DeserializationFormatFactory, SerializationFormatFactory {
 
     public static final String IDENTIFIER = "shareplex-json";
+    private static Logger LOG = LoggerFactory.getLogger(SharePlexJsonFormatFactory.class);
 
     @Override
     public DecodingFormat<DeserializationSchema<RowData>> createDecodingFormat(
@@ -63,10 +66,16 @@ public class SharePlexJsonFormatFactory
         validateDecodingFormatOptions(formatOptions);
 
         final boolean ignoreParseErrors = formatOptions.get(IGNORE_PARSE_ERRORS);
+        String defaultTable = formatOptions.get(FILTER_TABLE);
+        SharePlexJsonFormatOptions.setDefaultTable(defaultTable);
+
         final TimestampFormat timestampFormat =
                 JsonFormatOptionsUtil.getTimestampFormat(formatOptions);
 
-        return new SharePlexJsonDecodingFormat(ignoreParseErrors, timestampFormat);
+        LOG.info("config..." + formatOptions);
+        LOG.info("config...defa " + defaultTable);
+
+        return new SharePlexJsonDecodingFormat(ignoreParseErrors, timestampFormat,defaultTable);
     }
 
     @Override

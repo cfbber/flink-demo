@@ -34,6 +34,8 @@ import org.apache.flink.table.types.logical.RowType;
 import org.apache.flink.table.types.utils.DataTypeUtils;
 import org.apache.flink.types.RowKind;
 import org.apache.flink.util.Collector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -57,6 +59,7 @@ import static java.lang.String.format;
  */
 public class SharePlexJsonDeserializationSchema implements DeserializationSchema<RowData> {
     private static final long serialVersionUID = 2L;
+    private static Logger LOG = LoggerFactory.getLogger(SharePlexJsonDeserializationSchema.class);
 
     private static final String FIELD_OLD = "old";
     private static final String OP_INSERT = "insert";
@@ -97,13 +100,15 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
      * Number of physical fields.
      */
     private final int fieldCount;
+    private final String defaultTable;
 
     public SharePlexJsonDeserializationSchema(
             DataType physicalDataType,
-            List<SharePlexJsonDecodingFormat.ReadableMetadata> requestedMetadata,
+            List<ReadableMetadata> requestedMetadata,
             TypeInformation<RowData> producedTypeInfo,
             boolean ignoreParseErrors,
-            TimestampFormat timestampFormat) {
+            TimestampFormat timestampFormat, String defaultTable) {
+        this.defaultTable = defaultTable;
         final RowType jsonRowType = createJsonRowType(physicalDataType, requestedMetadata);
         this.jsonDeserializer =
                 new JsonRowDataDeserializationSchema(
@@ -136,6 +141,8 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
         if (message == null || message.length == 0) {
             return;
         }
+
+
         message = convertMax(message);
         if (message == null || message.length == 0) {
             return;
@@ -192,7 +199,7 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
         }
     }
 
-    private static byte[] convertMax(byte[] origin) {
+    private byte[] convertMax(byte[] origin) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -202,6 +209,12 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
             jsonNode = mapper.readTree(origin);
 
             JsonNode meta = jsonNode.get("meta");
+
+            String table = meta.get("table").asText();
+
+            if (!filter(table)) {
+                return null;
+            }
 
             JsonNode op = meta.get("op");
             String type = "";
@@ -237,6 +250,20 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
             return null;
         }
 
+    }
+
+    // 留下为true
+    private boolean filter(String table) {
+        LOG.info("table -" + table);
+        LOG.info("xx table -" +  this.defaultTable);
+
+
+        String configTable = this.defaultTable;
+        if ("".equals(configTable) || configTable == null) {
+            return true;
+        }
+
+        return configTable.equals(table);
     }
 
     private void emitRow(

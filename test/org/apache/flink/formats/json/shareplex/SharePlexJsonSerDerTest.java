@@ -77,7 +77,7 @@ public class SharePlexJsonSerDerTest {
                         requestedMetadata,
                         InternalTypeInfo.of(producedDataType.getLogicalType()),
                         false,
-                        TimestampFormat.ISO_8601);
+                        TimestampFormat.ISO_8601, "product");
         final SimpleCollector collector = new SimpleCollector();
         deserializationSchema.deserialize(firstLine.getBytes(StandardCharsets.UTF_8), collector);
         assertEquals(1, collector.list.size());
@@ -104,7 +104,7 @@ public class SharePlexJsonSerDerTest {
                         Collections.emptyList(),
                         InternalTypeInfo.of(PHYSICAL_DATA_TYPE.getLogicalType()),
                         false,
-                        TimestampFormat.ISO_8601);
+                        TimestampFormat.ISO_8601, "product");
 
         SimpleCollector collector = new SimpleCollector();
         for (String line : lines) {

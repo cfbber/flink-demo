@@ -20,11 +20,18 @@ package org.apache.flink.formats.json.shareplex;
 
 import org.apache.flink.annotation.PublicEvolving;
 import org.apache.flink.configuration.ConfigOption;
+import org.apache.flink.configuration.ConfigOptions;
 import org.apache.flink.formats.json.JsonFormatOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/** Option utils for shareplex-json format. */
+/**
+ * Option utils for shareplex-json format.
+ */
 @PublicEvolving
 public class SharePlexJsonFormatOptions {
+    private static Logger LOG = LoggerFactory.getLogger(SharePlexJsonFormatOptions.class);
+
 
     public static final ConfigOption<Boolean> IGNORE_PARSE_ERRORS =
             JsonFormatOptions.IGNORE_PARSE_ERRORS;
@@ -37,5 +44,27 @@ public class SharePlexJsonFormatOptions {
     public static final ConfigOption<String> JSON_MAP_NULL_KEY_LITERAL =
             JsonFormatOptions.MAP_NULL_KEY_LITERAL;
 
-    private SharePlexJsonFormatOptions() {}
+    public static final ConfigOption<String> FILTER_TABLE =
+            ConfigOptions.key("property-version")
+                    .stringType()
+                    .defaultValue("")
+                    .withDescription(
+                            "Optional flag to control the handling filter table.");
+
+    private static String DEFAULT_TABLE;
+
+
+    private SharePlexJsonFormatOptions() {
+    }
+
+    public static String getDefaultTable() {
+        LOG.info("get config defaultTable ..." + DEFAULT_TABLE);
+
+        return DEFAULT_TABLE;
+    }
+
+    public static void setDefaultTable(String defaultTable) {
+        LOG.info("set config defaultTable ..." + defaultTable);
+        DEFAULT_TABLE = defaultTable;
+    }
 }
