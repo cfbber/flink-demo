@@ -62,7 +62,14 @@ public class SharePlexJsonDecodingFormat implements DecodingFormat<Deserializati
     private final TimestampFormat timestampFormat;
 
     private final String defaultTable ;
+    static {
+        System.err.println("sscinit........" + SharePlexJsonDecodingFormat.class);
+    }
 
+    {
+        System.err.println("sscinit new.........." + SharePlexJsonDecodingFormat.class);
+
+    }
     public SharePlexJsonDecodingFormat(boolean ignoreParseErrors, TimestampFormat timestampFormat, String defaultTable) {
         this.ignoreParseErrors = ignoreParseErrors;
         this.timestampFormat = timestampFormat;
@@ -95,8 +102,8 @@ public class SharePlexJsonDecodingFormat implements DecodingFormat<Deserializati
                 DataTypeUtils.appendRowFields(physicalDataType, metadataFields);
         final TypeInformation<RowData> producedTypeInfo =
                 context.createTypeInformation(producedDataType);
-        LOG.info("context--------" + context);
-        LOG.info("context...." + context.getClass());
+        System.err.println("context--------" + context);
+        System.err.println("context...." + context.getClass());
 //        context.
         return new SharePlexJsonDeserializationSchema(
                 physicalDataType,

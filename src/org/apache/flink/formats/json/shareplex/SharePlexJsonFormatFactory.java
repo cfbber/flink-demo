@@ -59,6 +59,15 @@ public class SharePlexJsonFormatFactory
     public static final String IDENTIFIER = "shareplex-json";
     private static Logger LOG = LoggerFactory.getLogger(SharePlexJsonFormatFactory.class);
 
+    static {
+        System.err.println("init........" + SharePlexJsonFormatFactory.class);
+    }
+
+    {
+       System.err.println("init new.........." + SharePlexJsonFormatFactory.class);
+
+    }
+
     @Override
     public DecodingFormat<DeserializationSchema<RowData>> createDecodingFormat(
             DynamicTableFactory.Context context, ReadableConfig formatOptions) {
@@ -72,10 +81,10 @@ public class SharePlexJsonFormatFactory
         final TimestampFormat timestampFormat =
                 JsonFormatOptionsUtil.getTimestampFormat(formatOptions);
 
-        LOG.info("config..." + formatOptions);
-        LOG.info("config...defa " + defaultTable);
+        System.err.println("config..." + formatOptions);
+        System.err.println("config...defa " + defaultTable);
 
-        return new SharePlexJsonDecodingFormat(ignoreParseErrors, timestampFormat,defaultTable);
+        return new SharePlexJsonDecodingFormat(ignoreParseErrors, timestampFormat, defaultTable);
     }
 
     @Override
@@ -91,6 +100,12 @@ public class SharePlexJsonFormatFactory
 
         final boolean encodeDecimalAsPlainNumber =
                 formatOptions.get(ENCODE_DECIMAL_AS_PLAIN_NUMBER);
+
+        String defaultTable = formatOptions.get(FILTER_TABLE);
+        SharePlexJsonFormatOptions.setDefaultTable(defaultTable);
+
+        System.err.println("config..." + formatOptions);
+        System.err.println("config...defa " + defaultTable);
 
         return new EncodingFormat<SerializationSchema<RowData>>() {
 
@@ -139,12 +154,16 @@ public class SharePlexJsonFormatFactory
         return options;
     }
 
-    /** Validator for shareplex decoding format. */
+    /**
+     * Validator for shareplex decoding format.
+     */
     private static void validateDecodingFormatOptions(ReadableConfig tableOptions) {
         JsonFormatOptionsUtil.validateDecodingFormatOptions(tableOptions);
     }
 
-    /** Validator for shareplex encoding format. */
+    /**
+     * Validator for shareplex encoding format.
+     */
     private static void validateEncodingFormatOptions(ReadableConfig tableOptions) {
         JsonFormatOptionsUtil.validateEncodingFormatOptions(tableOptions);
     }

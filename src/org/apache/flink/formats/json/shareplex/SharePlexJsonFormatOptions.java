@@ -58,13 +58,13 @@ public class SharePlexJsonFormatOptions {
     }
 
     public static String getDefaultTable() {
-        LOG.info("get config defaultTable ..." + DEFAULT_TABLE);
+        System.err.println("get config defaultTable ..." + DEFAULT_TABLE);
 
         return DEFAULT_TABLE;
     }
 
     public static void setDefaultTable(String defaultTable) {
-        LOG.info("set config defaultTable ..." + defaultTable);
+        System.err.println("set config defaultTable ..." + defaultTable);
         DEFAULT_TABLE = defaultTable;
     }
 }

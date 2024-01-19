@@ -66,6 +66,14 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
     private static final String OP_UPDATE = "update";
     private static final String OP_DELETE = "delete";
 
+    static {
+        System.err.println("scinit........" + SharePlexJsonDeserializationSchema.class);
+    }
+
+    {
+        System.err.println("scinit new.........." + SharePlexJsonDeserializationSchema.class);
+
+    }
     /**
      * The deserializer to deserialize shareplex JSON data.
      */
@@ -108,6 +116,9 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
             TypeInformation<RowData> producedTypeInfo,
             boolean ignoreParseErrors,
             TimestampFormat timestampFormat, String defaultTable) {
+
+        System.err.println("init ... 112 " + this + " ------ " + defaultTable);
+
         this.defaultTable = defaultTable;
         final RowType jsonRowType = createJsonRowType(physicalDataType, requestedMetadata);
         this.jsonDeserializer =
@@ -134,6 +145,12 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
     public RowData deserialize(byte[] message) throws IOException {
         throw new RuntimeException(
                 "Please invoke DeserializationSchema#deserialize(byte[], Collector<RowData>) instead.");
+    }
+
+    @Override
+    public void open(InitializationContext context) throws Exception {
+        System.out.println("context " + context);
+        System.out.println("context --" + context.getClass());
     }
 
     @Override
@@ -254,8 +271,7 @@ public class SharePlexJsonDeserializationSchema implements DeserializationSchema
 
     // 留下为true
     private boolean filter(String table) {
-        LOG.info("table -" + table);
-        LOG.info("xx table -" +  this.defaultTable);
+        System.err.println("xx table -" + this.defaultTable);
 
 
         String configTable = this.defaultTable;

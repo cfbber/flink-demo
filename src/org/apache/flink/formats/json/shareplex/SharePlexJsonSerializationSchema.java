@@ -50,7 +50,14 @@ public class SharePlexJsonSerializationSchema implements SerializationSchema<Row
     private final TimestampFormat timestampFormat;
 
     private transient GenericRowData reuse;
+    static {
+        System.err.println("2scinit........" + SharePlexJsonSerializationSchema.class);
+    }
 
+    {
+        System.err.println("2scinit new.........." + SharePlexJsonSerializationSchema.class);
+
+    }
     public SharePlexJsonSerializationSchema(
             RowType rowType,
             TimestampFormat timestampFormat,
